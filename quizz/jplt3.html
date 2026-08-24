@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kanji Quiz</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/quizz.css">
+    <script src="../util/wanakana.min.js"></script>
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="main-header">
+
+        <div class="logo">
+
+            <h1>漢字 Quiz</h1>
+
+        </div>
+
+        <p class="tagline">
+            Apprends tes kanji en t'amusant 🇯🇵
+        </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         LOADING
+    ====================================================== -->
+
+    <div
+        id="loading"
+        class="panel"
+    >
+
+        <span class="loading-icon">
+            ⛩️
+        </span>
+
+        Chargement des kanji...
+
+    </div>
+
+
+    <!-- =====================================================
+         ERROR
+    ====================================================== -->
+
+    <div
+        id="errorMessage"
+        class="hidden"
+    ></div>
+
+
+    <!-- =====================================================
+         CONFIGURATION
+    ====================================================== -->
+
+    <section
+        id="configScreen"
+        class="hidden"
+    >
+
+        <h2 class="section-title">
+            Configure ton quiz
+        </h2>
+
+        <p class="section-description">
+            Choisis le type de réponse que tu veux travailler.
+        </p>
+
+
+        <!-- MODES -->
+
+        <div class="mode-container">
+
+            <label class="mode-option selected">
+
+                <input
+                    type="radio"
+                    name="quizMode"
+                    value="meanings"
+                    checked
+                >
+
+                <span class="mode-icon">
+                    💭
+                </span>
+
+                <div class="mode-title">
+                    Meanings
+                </div>
+
+                <div class="mode-description">
+                    Trouver la signification
+                </div>
+
+            </label>
+
+
+            <label class="mode-option">
+
+                <input
+                    type="radio"
+                    name="quizMode"
+                    value="on_readings"
+                >
+
+                <span class="mode-icon">
+                    音
+                </span>
+
+                <div class="mode-title">
+                    On readings
+                </div>
+
+                <div class="mode-description">
+                    音読み
+                </div>
+
+            </label>
+
+
+            <label class="mode-option">
+
+                <input
+                    type="radio"
+                    name="quizMode"
+                    value="kun_readings"
+                >
+
+                <span class="mode-icon">
+                    訓
+                </span>
+
+                <div class="mode-title">
+                    Kun readings
+                </div>
+
+                <div class="mode-description">
+                    訓読み
+                </div>
+
+            </label>
+
+        </div>
+
+
+        <!-- SELECTION KANJI -->
+
+        <div class="selection-section">
+
+            <div class="selection-header">
+
+                <h3 class="selection-title">
+
+                    Choisis tes kanji
+
+                    <span
+                        id="selectedCount"
+                        class="selected-count"
+                    >
+                        0 sélectionnés
+                    </span>
+
+                </h3>
+
+
+                <button
+                    id="selectAllBtn"
+                    class="btn btn-secondary"
+                    type="button"
+                >
+
+                    <span class="btn-icon">
+                        ☑️
+                    </span>
+
+                    Tout désélectionner
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="kanjiList"
+                class="kanji-list"
+            ></div>
+
+        </div>
+
+
+        <!-- START -->
+
+        <div class="action-buttons">
+
+            <button
+                id="startQuizBtn"
+                class="btn btn-primary"
+                type="button"
+            >
+
+                <span class="btn-icon">
+                    🎌
+                </span>
+
+                Commencer le quiz
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         QUIZ
+    ====================================================== -->
+
+    <section
+        id="quizScreen"
+        class="hidden"
+    >
+
+        <div class="quiz-header">
+
+            <div class="progress-container">
+
+                <div
+                    id="progress"
+                    class="progress-text"
+                >
+                    Question 1 / 10
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="progressFill"
+                        class="progress-fill"
+                        style="width: 0%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="score"
+                class="score"
+            >
+                Score : 0
+            </div>
+
+        </div>
+
+
+        <div class="question">
+
+            <div class="question-label">
+                Quel est ce kanji ?
+            </div>
+
+
+            <div
+                id="questionKanji"
+                class="question-kanji"
+            >
+                一
+            </div>
+
+
+            <div
+                id="questionText"
+                class="question-text"
+            >
+                Quelle est la signification de ce kanji ?
+            </div>
+
+
+            <input
+                id="answerInput"
+                class="answer-input"
+                type="text"
+                autocomplete="off"
+                placeholder="Écris ta réponse..."
+            >
+
+
+            <div class="quiz-actions">
+
+                <button
+                    id="submitAnswerBtn"
+                    class="btn btn-primary"
+                    type="button"
+                >
+
+                    ✓ Valider
+
+                </button>
+
+
+                <button
+                    id="nextQuestionBtn"
+                    class="btn btn-green hidden"
+                    type="button"
+                >
+
+                    Question suivante →
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="result"
+                class="result hidden"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL
+    ====================================================== -->
+
+    <section
+        id="finalScreen"
+        class="hidden"
+    >
+
+        <div class="final-score">
+
+            <div class="final-icon">
+                🎉
+            </div>
+
+
+            <h2>
+                Quiz terminé !
+            </h2>
+
+
+            <div
+                id="finalScoreNumber"
+                class="final-score-number"
+            >
+                0 / 0
+            </div>
+
+
+            <div
+                id="finalMessage"
+                class="final-message"
+            >
+                Bravo !
+            </div>
+
+
+            <button
+                id="restartBtn"
+                class="btn btn-primary"
+                type="button"
+            >
+
+                ↻ Recommencer
+
+            </button>
+
+        </div>
+
+    </section>
+    
+        <!-- Boutons de navigation -->
+        <nav class="nav-buttons">
+            <a href="../index.html" class="btn-back btn-home btn-nav">🏠 Page d'accueil</a>
+            <a href="../learn/menu.html" class="btn-back btn-learn btn-nav">📚 Apprendre les kanjis</a>
+            <a href="../quizz/menu.html" class="btn-back btn-learn btn-nav">📚 Faire un quiz</a>
+        </nav>
+    <footer class="simple-footer">
+
+        Kanji Quiz · 日本語を勉強しましょう 🇯🇵
+
+    </footer>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+const DATA_URL =
+    "/data/kanjis-n3.json";
+
+
+/* =========================================================
+   DONNÉES
+========================================================= */
+
+let KANJI_DATA = [];
+
+
+/* =========================================================
+   VARIABLES DU QUIZ
+========================================================= */
+
+let currentMode = "meanings";
+
+const wanakana = window.wanakana;
+
+let selectedKanji = [];
+
+let quizQuestions = [];
+
+let currentQuestionIndex = 0;
+
+let score = 0;
+
+let answerValidated = false;
+
+
+/* =========================================================
+   ELEMENTS HTML
+========================================================= */
+
+const loading =
+    document.getElementById("loading");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+const configScreen =
+    document.getElementById("configScreen");
+
+const quizScreen =
+    document.getElementById("quizScreen");
+
+const finalScreen =
+    document.getElementById("finalScreen");
+
+const kanjiList =
+    document.getElementById("kanjiList");
+
+const selectAllBtn =
+    document.getElementById("selectAllBtn");
+
+const selectedCount =
+    document.getElementById("selectedCount");
+
+const startQuizBtn =
+    document.getElementById("startQuizBtn");
+
+const questionKanji =
+    document.getElementById("questionKanji");
+
+const questionText =
+    document.getElementById("questionText");
+
+const answerInput =
+    document.getElementById("answerInput");
+
+const submitAnswerBtn =
+    document.getElementById("submitAnswerBtn");
+
+const nextQuestionBtn =
+    document.getElementById("nextQuestionBtn");
+
+const result =
+    document.getElementById("result");
+
+const progress =
+    document.getElementById("progress");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+const scoreElement =
+    document.getElementById("score");
+
+const finalScoreNumber =
+    document.getElementById("finalScoreNumber");
+
+const finalMessage =
+    document.getElementById("finalMessage");
+
+const restartBtn =
+    document.getElementById("restartBtn");
+
+
+/* =========================================================
+   CHARGEMENT JSON
+========================================================= */
+
+async function loadKanjiData() {
+
+    try {
+
+        loading.classList.remove("hidden");
+
+        const response =
+            await fetch(DATA_URL);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Erreur HTTP ${response.status}`
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (!Array.isArray(data)) {
+
+            throw new Error(
+                "Le fichier JSON doit contenir un tableau."
+            );
+
+        }
+
+
+        KANJI_DATA = data;
+
+
+        renderKanjiList();
+
+        updateSelectAllButton();
+
+        updateSelectedCount();
+
+
+        loading.classList.add("hidden");
+
+        configScreen.classList.remove(
+            "hidden"
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        loading.classList.add(
+            "hidden"
+        );
+
+
+        errorMessage.classList.remove(
+            "hidden"
+        );
+
+
+        errorMessage.innerHTML = `
+
+            <strong>
+                ❌ Impossible de charger les kanji
+            </strong>
+
+            <br><br>
+
+            ${escapeHtml(error.message)}
+
+            <br><br>
+
+            Fichier recherché :
+
+            <code>
+                ${escapeHtml(DATA_URL)}
+            </code>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   AFFICHER LA LISTE DES KANJI
+========================================================= */
+
+function renderKanjiList() {
+
+    kanjiList.innerHTML = "";
+
+
+    KANJI_DATA.forEach(
+        (kanji, index) => {
+
+            const row =
+                document.createElement(
+                    "label"
+                );
+
+
+            row.className =
+                "kanji-row";
+
+
+            row.innerHTML = `
+
+                <input
+                    type="checkbox"
+                    class="kanji-checkbox"
+                    data-index="${index}"
+                    checked
+                >
+
+                <div class="kanji-character">
+
+                    ${escapeHtml(
+                        kanji.kanji
+                    )}
+
+                </div>
+
+                <div class="kanji-info">
+
+                    <div class="kanji-meaning">
+
+                        ${escapeHtml(
+                            (
+                                kanji.meanings ||
+                                []
+                            ).join(", ")
+                        )}
+
+                    </div>
+
+                    <div class="kanji-meta">
+
+                        JLPT
+                        ${kanji.jlpt ?? "-"}
+
+                        ·
+
+                        Grade
+                        ${kanji.grade ?? "-"}
+
+                        ·
+
+                        ${kanji.stroke_count ?? "-"}
+                        traits
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            kanjiList.appendChild(row);
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            ".kanji-checkbox"
+        )
+        .forEach(checkbox => {
+
+            checkbox.addEventListener(
+                "change",
+                () => {
+
+                    updateSelectAllButton();
+
+                    updateSelectedCount();
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   MODE
+========================================================= */
+
+function setupModeSelection() {
+
+    const modeOptions =
+        document.querySelectorAll(
+            ".mode-option"
+        );
+
+
+    const modeInputs =
+        document.querySelectorAll(
+            'input[name="quizMode"]'
+        );
+
+
+    modeInputs.forEach(input => {
+
+        input.addEventListener(
+            "change",
+            () => {
+
+                currentMode =
+                    input.value;
+
+
+                modeOptions.forEach(
+                    option => {
+
+                        option.classList.remove(
+                            "selected"
+                        );
+
+                    }
+                );
+
+
+                input
+                    .closest(
+                        ".mode-option"
+                    )
+                    .classList.add(
+                        "selected"
+                    );
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   TOUT SELECTIONNER
+========================================================= */
+
+selectAllBtn.addEventListener(
+    "click",
+    () => {
+
+        const checkboxes =
+            [
+                ...document.querySelectorAll(
+                    ".kanji-checkbox"
+                )
+            ];
+
+
+        if (checkboxes.length === 0) {
+            return;
+        }
+
+
+        const allSelected =
+            checkboxes.every(
+                checkbox =>
+                    checkbox.checked
+            );
+
+
+        /*
+            Si tout est déjà sélectionné :
+            on désélectionne tout.
+
+            Sinon :
+            on sélectionne tout.
+        */
+
+        checkboxes.forEach(
+            checkbox => {
+
+                checkbox.checked =
+                    !allSelected;
+
+            }
+        );
+
+
+        updateSelectAllButton();
+
+        updateSelectedCount();
+
+    }
+);
+
+
+/* =========================================================
+   TEXTE DU BOUTON SELECT ALL
+========================================================= */
+
+function updateSelectAllButton() {
+
+    const checkboxes =
+        [
+            ...document.querySelectorAll(
+                ".kanji-checkbox"
+            )
+        ];
+
+
+    if (checkboxes.length === 0) {
+        return;
+    }
+
+
+    const allSelected =
+        checkboxes.every(
+            checkbox =>
+                checkbox.checked
+        );
+
+
+    if (allSelected) {
+
+        selectAllBtn.innerHTML = `
+            <span class="btn-icon">
+                
+            </span>
+
+            Tout désélectionner
+        `;
+
+    } else {
+
+        selectAllBtn.innerHTML = `
+            <span class="btn-icon">
+                
+            </span>
+
+            Tout sélectionner
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   COMPTEUR
+========================================================= */
+
+function updateSelectedCount() {
+
+    const checkboxes =
+        [
+            ...document.querySelectorAll(
+                ".kanji-checkbox"
+            )
+        ];
+
+
+    const count =
+        checkboxes.filter(
+            checkbox =>
+                checkbox.checked
+        ).length;
+
+
+    selectedCount.textContent =
+        `${count} sélectionné${count > 1 ? "s" : ""}`;
+
+}
+
+
+/* =========================================================
+   KANJI SELECTIONNES
+========================================================= */
+
+function getSelectedKanji() {
+
+    const checkboxes =
+        document.querySelectorAll(
+            ".kanji-checkbox"
+        );
+
+
+    return [
+        ...checkboxes
+    ]
+        .filter(
+            checkbox =>
+                checkbox.checked
+        )
+        .map(
+            checkbox =>
+                KANJI_DATA[
+                    Number(
+                        checkbox.dataset.index
+                    )
+                ]
+        );
+
+}
+
+
+/* =========================================================
+   START QUIZ
+========================================================= */
+
+startQuizBtn.addEventListener(
+    "click",
+    startQuiz
+);
+
+
+function startQuiz() {
+
+    selectedKanji =
+        getSelectedKanji();
+
+
+    if (
+        selectedKanji.length === 0
+    ) {
+
+        alert(
+            "Sélectionne au moins un kanji."
+        );
+
+        return;
+
+    }
+
+
+    const usableKanji =
+        selectedKanji.filter(
+            kanji => {
+
+                return getAnswersForKanji(
+                    kanji
+                ).length > 0;
+
+            }
+        );
+
+
+    if (
+        usableKanji.length === 0
+    ) {
+
+        alert(
+            "Aucun kanji sélectionné ne possède de données pour ce mode."
+        );
+
+        return;
+
+    }
+
+
+    quizQuestions =
+        shuffle(
+            [...usableKanji]
+        );
+
+
+    currentQuestionIndex = 0;
+
+    score = 0;
+
+
+    configScreen.classList.add(
+        "hidden"
+    );
+
+
+    finalScreen.classList.add(
+        "hidden"
+    );
+
+
+    quizScreen.classList.remove(
+        "hidden"
+    );
+
+
+    showQuestion();
+
+}
+
+
+/* =========================================================
+   REPONSES
+========================================================= */
+
+function getAnswersForKanji(
+    kanji
+) {
+
+    const answers = [];
+
+
+    switch (currentMode) {
+
+        case "meanings":
+
+            return (kanji.meanings || []).map(escapeHtml);
+
+
+        case "on_readings":
+
+            (kanji.on_readings || []).forEach(reading => {
+
+                /* Ajoute la lecture japonaise */
+                answers.push(escapeHtml(reading));
+
+
+                /* Ajoute la transcription romaji */
+                try {
+                    const romaji = wanakana.toRomaji(reading);
+                    if (romaji) {
+                        answers.push(romaji.toLowerCase());
+                    }
+                } catch (e) {
+                    console.warn("Erreur wanakana:", e);
+                }
+
+            });
+
+
+            return answers;
+
+
+        case "kun_readings":
+
+            (kanji.kun_readings || []).forEach(reading => {
+
+                /* Ajoute la lecture japonaise */
+                answers.push(escapeHtml(reading));
+
+
+                /* Ajoute la transcription romaji */
+                try {
+                    const romaji = wanakana.toRomaji(reading);
+                    if (romaji) {
+                        answers.push(romaji.toLowerCase());
+                    }
+                } catch (e) {
+                    console.warn("Erreur wanakana:", e);
+                }
+
+            });
+
+
+            return answers;
+
+
+        default:
+
+            return [];
+
+    }
+
+}
+
+
+/* =========================================================
+   QUESTION TEXT
+========================================================= */
+
+function getQuestionText() {
+
+    switch (currentMode) {
+
+        case "meanings":
+
+            return (
+                "Quelle est la signification de ce kanji ?"
+            );
+
+
+        case "on_readings":
+
+            return (
+                "Quelle est sa lecture On'yomi ?"
+            );
+
+
+        case "kun_readings":
+
+            return (
+                "Quelle est sa lecture Kun'yomi ?"
+            );
+
+
+        default:
+
+            return "Quelle est la réponse ?";
+
+    }
+
+}
+
+
+/* =========================================================
+   AFFICHER QUESTION
+========================================================= */
+
+function showQuestion() {
+
+    const question =
+        quizQuestions[
+            currentQuestionIndex
+        ];
+
+
+    answerValidated = false;
+
+
+    questionKanji.textContent =
+        question.kanji;
+
+
+    questionText.textContent =
+        getQuestionText();
+
+
+    const current =
+        currentQuestionIndex + 1;
+
+
+    const total =
+        quizQuestions.length;
+
+
+    progress.textContent =
+        `Question ${current} / ${total}`;
+
+
+    progressFill.style.width =
+        `${(current / total) * 100}%`;
+
+
+    scoreElement.textContent =
+        `Score : ${score}`;
+
+
+    answerInput.value = "";
+
+    answerInput.disabled = false;
+
+
+    result.className =
+        "result hidden";
+
+
+    result.innerHTML = "";
+
+
+    submitAnswerBtn.classList.remove(
+        "hidden"
+    );
+
+
+    nextQuestionBtn.classList.add(
+        "hidden"
+    );
+
+
+    setTimeout(
+        () => answerInput.focus(),
+        50
+    );
+
+}
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+submitAnswerBtn.addEventListener(
+    "click",
+    validateAnswer
+);
+
+
+answerInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key !== "Enter"
+        ) {
+            return;
+        }
+
+
+        if (!answerValidated) {
+
+            validateAnswer();
+
+        } else {
+
+            nextQuestion();
+
+        }
+
+    }
+);
+
+
+function validateAnswer() {
+
+    if (answerValidated) {
+        return;
+    }
+
+
+    const userAnswer =
+        normalizeAnswer(
+            answerInput.value
+        );
+
+
+    if (!userAnswer) {
+
+        alert(
+            "Entre une réponse."
+        );
+
+        answerInput.focus();
+
+        return;
+
+    }
+
+
+    const question =
+        quizQuestions[
+            currentQuestionIndex
+        ];
+
+
+    const correctAnswers =
+        getAnswersForKanji(
+            question
+        );
+
+
+    /*
+        La fonction normalizeAnswer ne supprime que les accents.
+        
+        Pour la validation, on compare le user answer 
+        avec les réponses correctes déjà normalisées.
+    */
+
+    const normalizedCorrectAnswers =
+        correctAnswers.map(
+            normalizeAnswer
+        );
+
+
+    const isCorrect =
+        normalizedCorrectAnswers.includes(
+            userAnswer
+        );
+
+
+    answerValidated = true;
+
+
+    answerInput.disabled = true;
+
+
+    submitAnswerBtn.classList.add(
+        "hidden"
+    );
+
+
+    nextQuestionBtn.classList.remove(
+        "hidden"
+    );
+
+
+    if (isCorrect) {
+
+        score++;
+
+
+        result.className =
+            "result correct";
+
+
+        result.innerHTML = `
+
+            <div class="result-title">
+                ✓ Correct !
+            </div>
+
+            <div>
+                Bonne réponse :
+            </div>
+
+            <div class="correct-answer">
+
+                ${correctAnswers
+                    .map(
+                        escapeHtml
+                    )
+                    .join(" / ")
+                }
+
+            </div>
+
+            ${getReadingsHtml(question)}
+
+        `;
+
+    } else {
+
+        result.className =
+            "result incorrect";
+
+
+        result.innerHTML = `
+
+            <div class="result-title">
+                ✗ Incorrect
+            </div>
+
+            <div>
+                La réponse attendue était :
+            </div>
+
+            <div class="correct-answer">
+
+                ${correctAnswers
+                    .map(
+                        escapeHtml
+                    )
+                    .join(" / ")
+                }
+
+            </div>
+
+            ${getReadingsHtml(question)}
+
+        `;
+
+    }
+
+
+    scoreElement.textContent =
+        `Score : ${score}`;
+
+}
+
+
+/* =========================================================
+   AFFICHAGE DES LECTURES
+=========================================================
+
+   IMPORTANT :
+
+   En mode Meaning :
+   on affiche Kun + On.
+
+   Cela permet par exemple :
+
+       一
+
+       Correct : one
+
+       Kun : ひと- / ひと.つ
+       On  : イチ / イツ
+
+========================================================= */
+
+function getReadingsHtml(
+    kanji
+) {
+
+    /*
+        On affiche les lectures
+        particulièrement en mode Meaning.
+
+        On peut également les afficher
+        dans les autres modes.
+    */
+
+    const kunReadings =
+        kanji.kun_readings || [];
+
+
+    const onReadings =
+        kanji.on_readings || [];
+
+
+    if (
+        kunReadings.length === 0 &&
+        onReadings.length === 0
+    ) {
+
+        return "";
+
+    }
+
+
+    return `
+
+        <div class="readings-container">
+
+            <div class="readings-title">
+
+                📖 Lectures du kanji
+
+            </div>
+
+
+            ${
+                kunReadings.length > 0
+                    ? `
+                        <div class="reading-group">
+
+                            <span class="reading-label">
+                                Kun:
+                            </span>
+
+                            ${kunReadings
+                                .map(
+                                    reading => `
+                                        <span class="kana">
+                                            ${escapeHtml(
+                                                reading
+                                            )}
+                                        </span>
+                                    `
+                                )
+                                .join("")
+                            }
+
+                        </div>
+                    `
+                    : ""
+            }
+
+
+            ${
+                onReadings.length > 0
+                    ? `
+                        <div class="reading-group">
+
+                            <span class="reading-label">
+                                On:
+                            </span>
+
+                            ${onReadings
+                                .map(
+                                    reading => `
+                                        <span class="kana">
+                                            ${escapeHtml(
+                                                reading
+                                            )}
+                                        </span>
+                                    `
+                                )
+                                .join("")
+                            }
+
+                        </div>
+                    `
+                    : ""
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   QUESTION SUIVANTE
+========================================================= */
+
+nextQuestionBtn.addEventListener(
+    "click",
+    nextQuestion
+);
+
+
+function nextQuestion() {
+
+    currentQuestionIndex++;
+
+
+    if (
+        currentQuestionIndex >=
+        quizQuestions.length
+    ) {
+
+        showFinalScreen();
+
+        return;
+
+    }
+
+
+    showQuestion();
+
+}
+
+
+/* =========================================================
+   ECRAN FINAL
+========================================================= */
+
+function showFinalScreen() {
+
+    quizScreen.classList.add(
+        "hidden"
+    );
+
+
+    finalScreen.classList.remove(
+        "hidden"
+    );
+
+
+    const total =
+        quizQuestions.length;
+
+
+    finalScoreNumber.textContent =
+        `${score} / ${total}`;
+
+
+    const percentage =
+        Math.round(
+            (score / total) * 100
+        );
+
+
+    if (percentage === 100) {
+
+        finalMessage.textContent =
+            "🎉 Parfait ! Toutes les réponses sont correctes.";
+
+    } else if (percentage >= 80) {
+
+        finalMessage.textContent =
+            "👏 Excellent travail !";
+
+    } else if (percentage >= 60) {
+
+        finalMessage.textContent =
+            "👍 Très bien ! Continue comme ça.";
+
+    } else {
+
+        finalMessage.textContent =
+            "💪 Continue à t'entraîner !";
+
+    }
+
+}
+
+
+/* =========================================================
+   RECOMMENCER
+========================================================= */
+
+restartBtn.addEventListener(
+    "click",
+    () => {
+
+        finalScreen.classList.add(
+            "hidden"
+        );
+
+
+        configScreen.classList.remove(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   OUTILS
+========================================================= */
+
+function shuffle(array) {
+
+    const result =
+        [...array];
+
+
+    for (
+        let i = result.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+
+        [
+            result[i],
+            result[j]
+        ] = [
+            result[j],
+            result[i]
+        ];
+
+    }
+
+
+    return result;
+
+}
+
+
+function normalizeAnswer(
+    value
+) {
+
+    return value
+        .trim()
+        .toLowerCase()
+        .replace(
+            /\s+/g,
+            " "
+        );
+
+}
+
+
+function escapeHtml(
+    value
+) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+setupModeSelection();
+
+loadKanjiData();
+
+</script>
+
+</body>
+</html>

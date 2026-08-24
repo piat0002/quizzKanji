@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affichage Kanji N3 - J-Plut 3</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/learn.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🇯🇵 Tableau des Kanji N3 (J-Plut 3)</h1>
+        
+        <a href="menu.html" class="back-button">🔙 Retour au menu</a>
+        
+        <div id="loading" class="loading">Chargement des données...</div>
+        
+        <div id="error" style="display: none;" class="error"></div>
+        
+        <div class="table-container" style="display: none;">
+            <div id="stats" class="stats"></div>
+            <table id="kanji-table">
+                <thead>
+                    <tr>
+                        <th>Kanji</th>
+                        <th>Signification</th>
+                        <th>Lecture Kun-yo</th>
+                        <th>Lecture On</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Les données seront chargées ici -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../util/wanakana.min.js"></script>
+    <script>
+        const DATA_FILE = '../data/kanjis-n4.json';
+
+        async function loadAndDisplayKanji() {
+            try {
+                const response = await fetch(DATA_FILE);
+                if (!response.ok) {
+                    throw new Error('Erreur de chargement: ' + response.status);
+                }
+                
+                const kanjiData = await response.json();
+                
+                document.getElementById('loading').style.display = 'none';
+                document.querySelector('.table-container').style.display = 'block';
+                
+                // Afficher le nombre total de kanjis
+                document.getElementById('stats').textContent = 
+                    `Total : ${kanjiData.length} kanji N3`;
+                
+                // Remplir le tableau
+                const tbody = document.getElementById('table-body');
+                
+                kanjiData.forEach((kanji, index) => {
+                    const tr = document.createElement('tr');
+                    
+                    // Kanji
+                    const tdKanji = document.createElement('td');
+                    tdKanji.className = 'kanji-cell';
+                    tdKanji.textContent = kanji.kanji;
+                    tr.appendChild(tdKanji);
+                    
+                    // Signification
+                    const tdMeaning = document.createElement('td');
+                    tdMeaning.className = 'meaning-cell';
+                    tdMeaning.textContent = kanji.meanings.length > 0 ? 
+                        kanji.meanings[0] : '-';
+                    tr.appendChild(tdMeaning);
+                    
+                    // Kun readings
+                    const tdKun = document.createElement('td');
+                    tdKun.className = 'reading-cell';
+                    if (kanji.kun_readings && kanji.kun_readings.length > 0) {
+                        tdKun.innerHTML = '<strong>Kun:</strong> ' + 
+                            kanji.kun_readings.join(', ');
+                    } else {
+                        tdKun.textContent = '-';
+                    }
+                    tr.appendChild(tdKun);
+                    
+                    // On readings
+                    const tdOn = document.createElement('td');
+                    tdOn.className = 'reading-cell';
+                    if (kanji.on_readings && kanji.on_readings.length > 0) {
+                        tdOn.innerHTML = '<strong>On:</strong> ' + 
+                            kanji.on_readings.join(', ');
+                    } else {
+                        tdOn.textContent = '-';
+                    }
+                    tr.appendChild(tdOn);
+                    
+                    tbody.appendChild(tr);
+                });
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                document.getElementById('loading').style.display = 'none';
+                const errorDiv = document.getElementById('error');
+                errorDiv.textContent = 'Erreur: ' + error.message;
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        // Charger les données au chargement de la page
+        document.addEventListener('DOMContentLoaded', loadAndDisplayKanji);
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+/* Variables CSS - Palette Japonaise */
+:root {
+    --primary-color: #e74c3c; /* Rouge japonais */
+    --secondary-color: #f39c12; /* Or */
+    --accent-color: #27ae60; /* Vert zen */
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --gradient-start: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: 20px auto; /* Centre horizontalement */
+}
+
+/* Header Styles */
+.main-header {
+    margin-bottom: 30px;
+}
+
+.logo h1 {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.tagline {
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+/* Hero Section */
+.hero {
+    padding: 30px 0;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    color: var(--dark-color);
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.levels-info h3 {
+    color: var(--dark-color);
+    margin-bottom: 15px;
+}
+
+.levels-info ul {
+    list-style: none;
+    display: inline-block;
+    text-align: left;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.levels-info li {
+    margin: 8px 0;
+    color: #555;
+    font-size: 1rem;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #c0392b);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--secondary-color), #d35400);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-icon {
+    font-size: 1.5rem;
+}
+
+/* Features Section */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.feature-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+    padding: 25px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    color: var(--dark-color);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.feature-card p {
+    color: #7f8c8d;
+    line-height: 1.5;
+}
+
+/* Stats Section - Simplifié */
+.stats-section {
+    display: none; /* Caché car non utilisé */
+}
+
+/* Footer Simple */
+.simple-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ecf0f1;
+    color: #95a5a6;
+    font-size: 0.9rem;
+}
+
+/* Container centré */
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .logo h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Kanji styling pour utilisation future */
+.kana {
+    display: inline-block;
+    margin: 0 2px;
+    color: var(--accent-color);
+    font-weight: bold;
+}

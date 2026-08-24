@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apprenez les Kanjis Japonnais - Accueil</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="logo">
+                <h1>🗻 Kanji Master</h1>
+                <p class="tagline">Maîtrisez les kanjis japonais étape par étape</p>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Bienvenue sur votre plateforme d'apprentissage des kanjis !</h2>
+                <p>Découvrez, apprenez et révisez les kanjis japonais dans un environnement ludique et efficace.</p>
+                
+                <!-- Boutons principaux -->
+                <div class="action-buttons">
+                    <a href="./learn/menu.html" class="btn btn-primary">
+                        <span class="btn-icon">📚</span>
+                        <span>Commencer à apprendre</span>
+                    </a>
+                    
+                    <a href="./quizz/menu.html" class="btn btn-secondary">
+                        <span class="btn-icon">⚡</span>
+                        <span>Faire un quiz</span>
+                    </a>
+                </div>
+
+                <!-- Info niveaux -->
+                <div class="levels-info">
+                    <h3>Niveaux disponibles :</h3>
+                    <ul>
+                        <li><strong>JLPT N5</strong> - Débutant</li>
+                        <li><strong>JLPT N4</strong> - Intermédiaire débutant</li>
+                        <li><strong>JLPT N3</strong> - Intermédiaire</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simple footer -->
+        <footer class="simple-footer">
+            <p>c'est un petit projet open source gratuit ! 😊</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animation des statistiques au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            const stats = document.querySelectorAll('.stat-number');
+            
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                let current = 0;
+                const increment = Math.ceil(target / 50);
+                
+                const updateCount = () => {
+                    current += increment;
+                    if (current < target) {
+                        stat.textContent = current;
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        stat.textContent = target + '+';
+                    }
+                };
+                
+                updateCount();
+            });
+
+            // Effet de parallaxe subtil sur le background
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                document.body.style.backgroundPosition = `${x * 10}px ${y * 10}px`;
+            });
+
+            // Animation des boutons au survol
+            const buttons = document.querySelectorAll('.action-buttons .btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
