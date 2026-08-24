@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Kanji Quiz</title>
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/quizz.css">
@@ -79,6 +78,12 @@
         <p class="section-description">
             Choisis le type de réponse que tu veux travailler.
         </p>
+
+        <!-- Niveau sélectionné -->
+        <div class="level-info">
+            <h3>Niveau : <span id="levelDisplay"></span></h3>
+            <p>Kanjis disponibles : <span id="kanjiCount"></span></p>
+        </div>
 
 
         <!-- MODES -->
@@ -184,7 +189,7 @@
                 >
 
                     <span class="btn-icon">
-                        ☑️
+                        
                     </span>
 
                     Tout désélectionner
@@ -391,7 +396,7 @@
         <nav class="nav-buttons">
             <a href="../index.html" class="btn-back btn-home btn-nav">🏠 Page d'accueil</a>
             <a href="../learn/menu.html" class="btn-back btn-learn btn-nav">📚 Apprendre les kanjis</a>
-            <a href="../quizz/menu.html" class="btn-back btn-learn btn-nav">📚 Faire un quiz</a>
+            <a href="menu.html" class="btn-back btn-learn btn-nav">📚 Faire un quiz</a>
         </nav>
     <footer class="simple-footer">
 
@@ -409,16 +414,51 @@
    CONFIGURATION
 ========================================================= */
 
-const DATA_URL =
-    "../data/kanjis-n4.json";
+// URI query parameters pour déterminer le niveau
+const urlParams = new URLSearchParams(window.location.search);
+const levelParam = urlParams.get('level'); // n3, n4 ou n5
 
-
-/* =========================================================
-   DONNÉES
-========================================================= */
+const DATA_BASE_URL = '../data/';
 
 let KANJI_DATA = [];
+let currentLevel = levelParam || 'n5'; // défaut si aucun paramètre
 
+/* =========================================================
+   DONNÉES - Mapping niveau -> fichier JSON
+========================================================= */
+
+const LEVEL_FILES = {
+    'n3': 'kanjis-n3.json',
+    'n4': 'kanjis-n4.json',
+    'n5': 'kanjis-n5.json'
+};
+
+const LEVEL_CONFIG = {
+    'n3': {
+        title: 'Quiz Niveau N3 (Intermédiaire)',
+        icon: '🎋',
+        desc: 'Kanjis avancés et grammaire complète<br>Durée : 15-20 minutes',
+        difficulty: 'Difficile 🟠',
+        questions: '55',
+        avgScore: '72%'
+    },
+    'n4': {
+        title: 'Quiz Niveau N4 (Débutant Intermédiaire)',
+        icon: '🌿',
+        desc: 'Kanjis intermédiaires et expressions<br>Durée : 10-15 minutes',
+        difficulty: 'Moyen 🟡',
+        questions: '40',
+        avgScore: '78%'
+    },
+    'n5': {
+        title: 'Quiz Niveau N5 (Débutant)',
+        icon: '🌱',
+        desc: 'Kanjis de base et vocabulaire simple<br>Durée : 5-10 minutes',
+        difficulty: 'Facile 🟢',
+        questions: '25',
+        avgScore: '85%'
+    }
+};
 
 /* =========================================================
    VARIABLES DU QUIZ
@@ -506,6 +546,12 @@ const finalMessage =
 const restartBtn =
     document.getElementById("restartBtn");
 
+const levelDisplay =
+    document.getElementById("levelDisplay");
+
+const kanjiCount =
+    document.getElementById("kanjiCount");
+
 
 /* =========================================================
    CHARGEMENT JSON
@@ -517,8 +563,13 @@ async function loadKanjiData() {
 
         loading.classList.remove("hidden");
 
+        const dataFileName = LEVEL_FILES[currentLevel];
+        
+        // Affiche le niveau configuré
+        levelDisplay.textContent = currentLevel.toUpperCase();
+
         const response =
-            await fetch(DATA_URL);
+            await fetch(DATA_BASE_URL + dataFileName);
 
 
         if (!response.ok) {
@@ -545,6 +596,8 @@ async function loadKanjiData() {
 
         KANJI_DATA = data;
 
+        // Affiche le nombre de kanjis disponibles
+        kanjiCount.textContent = data.length.toLocaleString('fr-FR');
 
         renderKanjiList();
 
@@ -552,7 +605,7 @@ async function loadKanjiData() {
 
         updateSelectedCount();
 
-
+        
         loading.classList.add("hidden");
 
         configScreen.classList.remove(
@@ -590,7 +643,7 @@ async function loadKanjiData() {
             Fichier recherché :
 
             <code>
-                ${escapeHtml(DATA_URL)}
+                ${escapeHtml(DATA_BASE_URL + LEVEL_FILES[currentLevel])}
             </code>
 
         `;
@@ -708,12 +761,6 @@ function renderKanjiList() {
 
 function setupModeSelection() {
 
-    const modeOptions =
-        document.querySelectorAll(
-            ".mode-option"
-        );
-
-
     const modeInputs =
         document.querySelectorAll(
             'input[name="quizMode"]'
@@ -729,25 +776,6 @@ function setupModeSelection() {
                 currentMode =
                     input.value;
 
-
-                modeOptions.forEach(
-                    option => {
-
-                        option.classList.remove(
-                            "selected"
-                        );
-
-                    }
-                );
-
-
-                input
-                    .closest(
-                        ".mode-option"
-                    )
-                    .classList.add(
-                        "selected"
-                    );
 
             }
         );

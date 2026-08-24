@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Affichage Kanji N4 - J-Plut 4</title>
+    <title>Affichage Kanji - Niveau JLPT</title>
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/learn.css">
 </head>
 <body>
     <div class="container">
-        <h1>🇯🇵 Tableau des Kanji N4 (J-Plut 4)</h1>
+        <h1>🇯🇵 Tableau des Kanji</h1>
         
         <a href="menu.html" class="back-button">🔙 Retour au menu</a>
         
         <div id="loading" class="loading">Chargement des données...</div>
         
         <div id="error" style="display: none;" class="error"></div>
+        
+        <div id="level-info" style="display: none;" class="level-info"></div>
         
         <div class="table-container" style="display: none;">
             <div id="stats" class="stats"></div>
@@ -24,7 +26,7 @@
                     <tr>
                         <th>Kanji</th>
                         <th>Signification</th>
-                        <th>Lecture Kun-yo</th>
+                        <th>Lecture Kun</th>
                         <th>Lecture On</th>
                     </tr>
                 </thead>
@@ -37,28 +39,89 @@
 
     <script src="../util/wanakana.min.js"></script>
     <script>
-        const DATA_FILE = '../data/kanjis-n4.json';
+        // Configuration des niveaux et fichiers de données correspondants
+        const LEVEL_CONFIG = {
+            n3: { 
+                file: '../data/kanjis-n3.json', 
+                title: 'Tableau des Kanji N3 (J-Plut 3)',
+                icon: '🎋' 
+            },
+            n4: { 
+                file: '../data/kanjis-n4.json', 
+                title: 'Tableau des Kanji N4 (J-Plut 4)',
+                icon: '🌿' 
+            },
+            n5: { 
+                file: '../data/kanjis-n5.json', 
+                title: 'Tableau des Kanji N5 (J-Plut 5)',
+                icon: '🌱' 
+            }
+        };
+
+        // Fonction pour obtenir le niveau à partir des paramètres URL
+        function getLevelFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const levelParam = params.get('level');
+            
+            // Convertir le paramètre en format standard
+            if (levelParam) {
+                const normalized = levelParam.toLowerCase();
+                return normalized.replace('jlpt', '').replace('/', '');
+            }
+            
+            // Si aucun paramètre n'est fourni, utiliser N5 par défaut
+            return 'n5';
+        }
+
+        // Fonction pour mapper le niveau au fichier de données approprié
+        function getLevelData(level) {
+            const levelMap = {
+                '3': 'n3',
+                '4': 'n4',
+                '5': 'n5'
+            };
+            
+            const levelCode = levelMap[level] || 'n5';
+            return LEVEL_CONFIG[levelCode];
+        }
 
         async function loadAndDisplayKanji() {
             try {
-                const response = await fetch(DATA_FILE);
+                const level = getLevelFromUrl();
+                const config = getLevelData(level);
+                
+                // Afficher l'info du niveau
+                document.getElementById('level-info').style.display = 'block';
+                document.getElementById('level-info').innerHTML = `
+                    <div class="level-badge">${config.icon} Niveau JLPT ${level.toUpperCase()}</div>
+                    <div class="level-description">Affichage des kanjis pour le niveau ${level.toUpperCase()}</div>
+                `;
+                
+                // Charger les données du fichier JSON correspondant
+                const response = await fetch(config.file);
                 if (!response.ok) {
-                    throw new Error('Erreur de chargement: ' + response.status);
+                    throw new Error('Erreur de chargement : ' + response.status);
                 }
                 
                 const kanjiData = await response.json();
                 
+                // Filtrer par niveau JLPT
+                const filteredKanji = kanjiData.filter(kanji => 
+                    kanji.jlpt === parseInt(level)
+                );
+                
+                // Afficher le nombre total de kanjis filtrés
+                document.getElementById('stats').textContent = 
+                    `Total : ${filteredKanji.length} kanji niveau ${level.toUpperCase()}`;
+                
                 document.getElementById('loading').style.display = 'none';
                 document.querySelector('.table-container').style.display = 'block';
-                
-                // Afficher le nombre total de kanjis
-                document.getElementById('stats').textContent = 
-                    `Total : ${kanjiData.length} kanji N4`;
+                document.getElementById('level-info').style.display = 'block';
                 
                 // Remplir le tableau
                 const tbody = document.getElementById('table-body');
                 
-                kanjiData.forEach((kanji, index) => {
+                filteredKanji.forEach((kanji, index) => {
                     const tr = document.createElement('tr');
                     
                     // Kanji
@@ -67,11 +130,14 @@
                     tdKanji.textContent = kanji.kanji;
                     tr.appendChild(tdKanji);
                     
-                    // Signification
+                    // Signification (afficher toutes les significations si plusieurs)
                     const tdMeaning = document.createElement('td');
                     tdMeaning.className = 'meaning-cell';
-                    tdMeaning.textContent = kanji.meanings.length > 0 ? 
-                        kanji.meanings[0] : '-';
+                    if (kanji.meanings && kanji.meanings.length > 0) {
+                        tdMeaning.textContent = kanji.meanings.join(', ');
+                    } else {
+                        tdMeaning.textContent = '-';
+                    }
                     tr.appendChild(tdMeaning);
                     
                     // Kun readings
@@ -103,7 +169,7 @@
                 console.error('Erreur:', error);
                 document.getElementById('loading').style.display = 'none';
                 const errorDiv = document.getElementById('error');
-                errorDiv.textContent = 'Erreur: ' + error.message;
+                errorDiv.textContent = 'Erreur : ' + error.message;
                 errorDiv.style.display = 'block';
             }
         }
