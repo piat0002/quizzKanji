@@ -10,71 +10,32 @@
     <script src="../util/wanakana.min.js"></script>
 </head>
 
-
 <body>
 
 <div class="container">
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
-
+    <!-- HEADER -->
     <header class="main-header">
-
         <div class="logo">
-
             <h1>漢字 Quiz</h1>
-
         </div>
-
         <p class="tagline">
             Apprends tes kanji en t'amusant 🇯🇵
         </p>
-
     </header>
 
-
-    <!-- =====================================================
-         LOADING
-    ====================================================== -->
-
-    <div
-        id="loading"
-        class="panel"
-    >
-
-        <span class="loading-icon">
-            ⛩️
-        </span>
-
+    <!-- LOADING -->
+    <div id="loading" class="panel">
+        <span class="loading-icon">⛩️</span>
         Chargement des kanji...
-
     </div>
 
+    <!-- ERROR -->
+    <div id="errorMessage" class="hidden"></div>
 
-    <!-- =====================================================
-         ERROR
-    ====================================================== -->
-
-    <div
-        id="errorMessage"
-        class="hidden"
-    ></div>
-
-
-    <!-- =====================================================
-         CONFIGURATION
-    ====================================================== -->
-
-    <section
-        id="configScreen"
-        class="hidden"
-    >
-
-        <h2 class="section-title">
-            Configure ton quiz
-        </h2>
-
+    <!-- CONFIGURATION -->
+    <section id="configScreen" class="hidden">
+        <h2 class="section-title">Configure ton quiz</h2>
         <p class="section-description">
             Choisis le type de réponse que tu veux travailler.
         </p>
@@ -85,347 +46,120 @@
             <p>Kanjis disponibles : <span id="kanjiCount"></span></p>
         </div>
 
-
         <!-- MODES -->
-
         <div class="mode-container">
-
             <label class="mode-option selected">
-
-                <input
-                    type="radio"
-                    name="quizMode"
-                    value="meanings"
-                    checked
-                >
-
-                <span class="mode-icon">
-                    💭
-                </span>
-
-                <div class="mode-title">
-                    Meanings
-                </div>
-
-                <div class="mode-description">
-                    Trouver la signification
-                </div>
-
+                <input type="radio" name="quizMode" value="meanings" checked>
+                <span class="mode-icon">💭</span>
+                <div class="mode-title">Meanings</div>
+                <div class="mode-description">Trouver la signification</div>
             </label>
-
 
             <label class="mode-option">
-
-                <input
-                    type="radio"
-                    name="quizMode"
-                    value="on_readings"
-                >
-
-                <span class="mode-icon">
-                    音
-                </span>
-
-                <div class="mode-title">
-                    On readings
-                </div>
-
-                <div class="mode-description">
-                    音読み
-                </div>
-
+                <input type="radio" name="quizMode" value="on_readings">
+                <span class="mode-icon">音</span>
+                <div class="mode-title">On readings</div>
+                <div class="mode-description">音読み</div>
             </label>
-
 
             <label class="mode-option">
-
-                <input
-                    type="radio"
-                    name="quizMode"
-                    value="kun_readings"
-                >
-
-                <span class="mode-icon">
-                    訓
-                </span>
-
-                <div class="mode-title">
-                    Kun readings
-                </div>
-
-                <div class="mode-description">
-                    訓読み
-                </div>
-
+                <input type="radio" name="quizMode" value="kun_readings">
+                <span class="mode-icon">訓</span>
+                <div class="mode-title">Kun readings</div>
+                <div class="mode-description">訓読み</div>
             </label>
-
         </div>
-
 
         <!-- SELECTION KANJI -->
-
         <div class="selection-section">
-
             <div class="selection-header">
-
                 <h3 class="selection-title">
-
                     Choisis tes kanji
-
-                    <span
-                        id="selectedCount"
-                        class="selected-count"
-                    >
-                        0 sélectionnés
-                    </span>
-
+                    <span id="selectedCount" class="selected-count">0 sélectionnés</span>
                 </h3>
 
-
-                <button
-                    id="selectAllBtn"
-                    class="btn btn-secondary"
-                    type="button"
-                >
-
-                    <span class="btn-icon">
-                        
-                    </span>
-
+                <button id="selectAllBtn" class="btn btn-secondary" type="button">
+                    <span class="btn-icon"></span>
                     Tout désélectionner
-
                 </button>
-
             </div>
 
-
-            <div
-                id="kanjiList"
-                class="kanji-list"
-            ></div>
-
+            <div id="kanjiList" class="kanji-list"></div>
         </div>
-
 
         <!-- START -->
-
         <div class="action-buttons">
-
-            <button
-                id="startQuizBtn"
-                class="btn btn-primary"
-                type="button"
-            >
-
-                <span class="btn-icon">
-                    🎌
-                </span>
-
+            <button id="startQuizBtn" class="btn btn-primary" type="button">
+                <span class="btn-icon">🎌</span>
                 Commencer le quiz
-
             </button>
-
         </div>
-
     </section>
 
-
-    <!-- =====================================================
-         QUIZ
-    ====================================================== -->
-
-    <section
-        id="quizScreen"
-        class="hidden"
-    >
-
+    <!-- QUIZ -->
+    <section id="quizScreen" class="hidden">
         <div class="quiz-header">
-
             <div class="progress-container">
-
-                <div
-                    id="progress"
-                    class="progress-text"
-                >
-                    Question 1 / 10
-                </div>
-
+                <div id="progress" class="progress-text">Question 1 / 10</div>
                 <div class="progress-bar">
-
-                    <div
-                        id="progressFill"
-                        class="progress-fill"
-                        style="width: 0%"
-                    ></div>
-
+                    <div id="progressFill" class="progress-fill" style="width: 0%"></div>
                 </div>
-
             </div>
 
-
-            <div
-                id="score"
-                class="score"
-            >
-                Score : 0
-            </div>
-
+            <div id="score" class="score">Score : 0</div>
         </div>
-
 
         <div class="question">
+            <div class="question-label">Quel est ce kanji ?</div>
+            <div id="questionKanji" class="question-kanji">一</div>
+            <div id="questionText" class="question-text">Quelle est la signification de ce kanji ?</div>
 
-            <div class="question-label">
-                Quel est ce kanji ?
-            </div>
-
-
-            <div
-                id="questionKanji"
-                class="question-kanji"
-            >
-                一
-            </div>
-
-
-            <div
-                id="questionText"
-                class="question-text"
-            >
-                Quelle est la signification de ce kanji ?
-            </div>
-
-
-            <input
-                id="answerInput"
-                class="answer-input"
-                type="text"
-                autocomplete="off"
-                placeholder="Écris ta réponse..."
-            >
-
+            <input id="answerInput" class="answer-input" type="text" autocomplete="off" placeholder="Écris ta réponse...">
 
             <div class="quiz-actions">
-
-                <button
-                    id="submitAnswerBtn"
-                    class="btn btn-primary"
-                    type="button"
-                >
-
-                    ✓ Valider
-
-                </button>
-
-
-                <button
-                    id="nextQuestionBtn"
-                    class="btn btn-green hidden"
-                    type="button"
-                >
-
-                    Question suivante →
-
-                </button>
-
+                <button id="submitAnswerBtn" class="btn btn-primary" type="button">✓ Valider</button>
+                <button id="nextQuestionBtn" class="btn btn-green hidden" type="button">Question suivante →</button>
             </div>
 
-
-            <div
-                id="result"
-                class="result hidden"
-            ></div>
-
+            <div id="result" class="result hidden"></div>
         </div>
-
     </section>
 
-
-    <!-- =====================================================
-         FINAL
-    ====================================================== -->
-
-    <section
-        id="finalScreen"
-        class="hidden"
-    >
-
+    <!-- FINAL -->
+    <section id="finalScreen" class="hidden">
         <div class="final-score">
-
-            <div class="final-icon">
-                🎉
-            </div>
-
-
-            <h2>
-                Quiz terminé !
-            </h2>
-
-
-            <div
-                id="finalScoreNumber"
-                class="final-score-number"
-            >
-                0 / 0
-            </div>
-
-
-            <div
-                id="finalMessage"
-                class="final-message"
-            >
-                Bravo !
-            </div>
-
-
-            <button
-                id="restartBtn"
-                class="btn btn-primary"
-                type="button"
-            >
-
-                ↻ Recommencer
-
-            </button>
-
+            <div class="final-icon">🎉</div>
+            <h2>Quiz terminé !</h2>
+            <div id="finalScoreNumber" class="final-score-number">0 / 0</div>
+            <div id="finalMessage" class="final-message">Bravo !</div>
+            <button id="restartBtn" class="btn btn-primary" type="button">↻ Recommencer</button>
         </div>
-
     </section>
-    
-        <!-- Boutons de navigation -->
-        <nav class="nav-buttons">
-            <a href="../index.html" class="btn-back btn-home btn-nav">🏠 Page d'accueil</a>
-            <a href="../learn/menu.html" class="btn-back btn-learn btn-nav">📚 Apprendre les kanjis</a>
-            <a href="menu.html" class="btn-back btn-learn btn-nav">📚 Faire un quiz</a>
-        </nav>
+
+    <!-- NAVIGATION -->
+    <nav class="nav-buttons">
+        <a href="../index.html" class="btn-back btn-home btn-nav">🏠 Page d'accueil</a>
+        <a href="../learn/menu.html" class="btn-back btn-learn btn-nav">📚 Apprendre les kanjis</a>
+        <a href="menu.html" class="btn-back btn-learn btn-nav">📚 Faire un quiz</a>
+    </nav>
+
     <footer class="simple-footer">
-
         Kanji Quiz · 日本語を勉強しましょう 🇯🇵
-
     </footer>
 
 </div>
 
-
-
 <script>
-
 /* =========================================================
    CONFIGURATION
 ========================================================= */
 
-// URI query parameters pour déterminer le niveau
 const urlParams = new URLSearchParams(window.location.search);
-const levelParam = urlParams.get('level'); // n3, n4 ou n5
+const levelParam = urlParams.get('level');
 
 const DATA_BASE_URL = '../data/';
-
 let KANJI_DATA = [];
-let currentLevel = levelParam || 'n5'; // défaut si aucun paramètre
-
-/* =========================================================
-   DONNÉES - Mapping niveau -> fichier JSON
-========================================================= */
+let currentLevel = levelParam || 'n5';
 
 const LEVEL_FILES = {
     'n3': 'kanjis-n3.json',
@@ -433,1293 +167,489 @@ const LEVEL_FILES = {
     'n5': 'kanjis-n5.json'
 };
 
-const LEVEL_CONFIG = {
-    'n3': {
-        title: 'Quiz Niveau N3 (Intermédiaire)',
-        icon: '🎋',
-        desc: 'Kanjis avancés et grammaire complète<br>Durée : 15-20 minutes',
-        difficulty: 'Difficile 🟠',
-        questions: '55',
-        avgScore: '72%'
-    },
-    'n4': {
-        title: 'Quiz Niveau N4 (Débutant Intermédiaire)',
-        icon: '🌿',
-        desc: 'Kanjis intermédiaires et expressions<br>Durée : 10-15 minutes',
-        difficulty: 'Moyen 🟡',
-        questions: '40',
-        avgScore: '78%'
-    },
-    'n5': {
-        title: 'Quiz Niveau N5 (Débutant)',
-        icon: '🌱',
-        desc: 'Kanjis de base et vocabulaire simple<br>Durée : 5-10 minutes',
-        difficulty: 'Facile 🟢',
-        questions: '25',
-        avgScore: '85%'
-    }
-};
-
 /* =========================================================
    VARIABLES DU QUIZ
 ========================================================= */
 
 let currentMode = "meanings";
-
 const wanakana = window.wanakana;
-
 let selectedKanji = [];
-
 let quizQuestions = [];
-
 let currentQuestionIndex = 0;
-
 let score = 0;
-
 let answerValidated = false;
-
 
 /* =========================================================
    ELEMENTS HTML
 ========================================================= */
 
-const loading =
-    document.getElementById("loading");
-
-const errorMessage =
-    document.getElementById("errorMessage");
-
-const configScreen =
-    document.getElementById("configScreen");
-
-const quizScreen =
-    document.getElementById("quizScreen");
-
-const finalScreen =
-    document.getElementById("finalScreen");
-
-const kanjiList =
-    document.getElementById("kanjiList");
-
-const selectAllBtn =
-    document.getElementById("selectAllBtn");
-
-const selectedCount =
-    document.getElementById("selectedCount");
-
-const startQuizBtn =
-    document.getElementById("startQuizBtn");
-
-const questionKanji =
-    document.getElementById("questionKanji");
-
-const questionText =
-    document.getElementById("questionText");
-
-const answerInput =
-    document.getElementById("answerInput");
-
-const submitAnswerBtn =
-    document.getElementById("submitAnswerBtn");
-
-const nextQuestionBtn =
-    document.getElementById("nextQuestionBtn");
-
-const result =
-    document.getElementById("result");
-
-const progress =
-    document.getElementById("progress");
-
-const progressFill =
-    document.getElementById("progressFill");
-
-const scoreElement =
-    document.getElementById("score");
-
-const finalScoreNumber =
-    document.getElementById("finalScoreNumber");
-
-const finalMessage =
-    document.getElementById("finalMessage");
-
-const restartBtn =
-    document.getElementById("restartBtn");
-
-const levelDisplay =
-    document.getElementById("levelDisplay");
-
-const kanjiCount =
-    document.getElementById("kanjiCount");
-
+const loading = document.getElementById("loading");
+const errorMessage = document.getElementById("errorMessage");
+const configScreen = document.getElementById("configScreen");
+const quizScreen = document.getElementById("quizScreen");
+const finalScreen = document.getElementById("finalScreen");
+const kanjiList = document.getElementById("kanjiList");
+const selectAllBtn = document.getElementById("selectAllBtn");
+const selectedCount = document.getElementById("selectedCount");
+const startQuizBtn = document.getElementById("startQuizBtn");
+const questionKanji = document.getElementById("questionKanji");
+const questionText = document.getElementById("questionText");
+const answerInput = document.getElementById("answerInput");
+const submitAnswerBtn = document.getElementById("submitAnswerBtn");
+const nextQuestionBtn = document.getElementById("nextQuestionBtn");
+const result = document.getElementById("result");
+const progress = document.getElementById("progress");
+const progressFill = document.getElementById("progressFill");
+const scoreElement = document.getElementById("score");
+const finalScoreNumber = document.getElementById("finalScoreNumber");
+const finalMessage = document.getElementById("finalMessage");
+const restartBtn = document.getElementById("restartBtn");
+const levelDisplay = document.getElementById("levelDisplay");
+const kanjiCount = document.getElementById("kanjiCount");
 
 /* =========================================================
    CHARGEMENT JSON
 ========================================================= */
 
 async function loadKanjiData() {
-
     try {
-
         loading.classList.remove("hidden");
-
         const dataFileName = LEVEL_FILES[currentLevel];
-        
-        // Affiche le niveau configuré
         levelDisplay.textContent = currentLevel.toUpperCase();
-
-        const response =
-            await fetch(DATA_BASE_URL + dataFileName);
-
-
+        
+        const response = await fetch(DATA_BASE_URL + dataFileName);
         if (!response.ok) {
-
-            throw new Error(
-                `Erreur HTTP ${response.status}`
-            );
-
+            throw new Error(`Erreur HTTP ${response.status}`);
         }
-
-
-        const data =
-            await response.json();
-
-
+        
+        const data = await response.json();
         if (!Array.isArray(data)) {
-
-            throw new Error(
-                "Le fichier JSON doit contenir un tableau."
-            );
-
+            throw new Error("Le fichier JSON doit contenir un tableau.");
         }
-
-
+        
         KANJI_DATA = data;
-
-        // Affiche le nombre de kanjis disponibles
         kanjiCount.textContent = data.length.toLocaleString('fr-FR');
-
+        
         renderKanjiList();
-
         updateSelectAllButton();
-
         updateSelectedCount();
-
         
         loading.classList.add("hidden");
-
-        configScreen.classList.remove(
-            "hidden"
-        );
-
-
+        configScreen.classList.remove("hidden");
     } catch (error) {
-
         console.error(error);
-
-
-        loading.classList.add(
-            "hidden"
-        );
-
-
-        errorMessage.classList.remove(
-            "hidden"
-        );
-
-
+        loading.classList.add("hidden");
+        errorMessage.classList.remove("hidden");
         errorMessage.innerHTML = `
-
-            <strong>
-                ❌ Impossible de charger les kanji
-            </strong>
-
-            <br><br>
-
-            ${escapeHtml(error.message)}
-
-            <br><br>
-
-            Fichier recherché :
-
-            <code>
-                ${escapeHtml(DATA_BASE_URL + LEVEL_FILES[currentLevel])}
-            </code>
-
+            <strong>❌ Impossible de charger les kanji</strong><br><br>
+            ${escapeHtml(error.message)}<br><br>
+            Fichier recherché :<br>
+            <code>${escapeHtml(DATA_BASE_URL + LEVEL_FILES[currentLevel])}</code>
         `;
-
     }
-
 }
 
+/* =========================================================
+   HELPER : EXTRAIRE LES SIGNIFICATIONS (FR + EN)
+========================================================= */
+
+function getKanjiMeanings(kanji) {
+    const frenchMeanings = (kanji.meanings_french || []).flat();
+    const englishMeanings = kanji.meanings || [];
+    
+    // Combine les réponses en évitant les doublons
+    const combined = [...frenchMeanings, ...englishMeanings];
+    return Array.from(new Set(combined));
+}
 
 /* =========================================================
    AFFICHER LA LISTE DES KANJI
 ========================================================= */
 
 function renderKanjiList() {
-
     kanjiList.innerHTML = "";
+    KANJI_DATA.forEach((kanji, index) => {
+        // Pour l'affichage de la liste, on préfère le FR s'il existe, sinon l'EN
+        const displayMeanings = (kanji.meanings_french && kanji.meanings_french.length > 0)
+            ? kanji.meanings_french.flat()
+            : (kanji.meanings || []);
 
+        const row = document.createElement("label");
+        row.className = "kanji-row";
+        row.innerHTML = `
+            <input type="checkbox" class="kanji-checkbox" data-index="${index}" checked>
+            <div class="kanji-character">${escapeHtml(kanji.kanji)}</div>
+            <div class="kanji-info">
+                <div class="kanji-meaning">${escapeHtml(displayMeanings.join(", "))}</div>
+                <div class="kanji-meta">JLPT ${kanji.jlpt ?? "-"} · Grade ${kanji.grade ?? "-"} · ${kanji.stroke_count ?? "-"} traits</div>
+            </div>
+        `;
+        kanjiList.appendChild(row);
+    });
 
-    KANJI_DATA.forEach(
-        (kanji, index) => {
-
-            const row =
-                document.createElement(
-                    "label"
-                );
-
-
-            row.className =
-                "kanji-row";
-
-
-            row.innerHTML = `
-
-                <input
-                    type="checkbox"
-                    class="kanji-checkbox"
-                    data-index="${index}"
-                    checked
-                >
-
-                <div class="kanji-character">
-
-                    ${escapeHtml(
-                        kanji.kanji
-                    )}
-
-                </div>
-
-                <div class="kanji-info">
-
-                    <div class="kanji-meaning">
-
-                        ${escapeHtml(
-                            (
-                                kanji.meanings ||
-                                []
-                            ).join(", ")
-                        )}
-
-                    </div>
-
-                    <div class="kanji-meta">
-
-                        JLPT
-                        ${kanji.jlpt ?? "-"}
-
-                        ·
-
-                        Grade
-                        ${kanji.grade ?? "-"}
-
-                        ·
-
-                        ${kanji.stroke_count ?? "-"}
-                        traits
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            kanjiList.appendChild(row);
-
-        }
-    );
-
-
-    document
-        .querySelectorAll(
-            ".kanji-checkbox"
-        )
-        .forEach(checkbox => {
-
-            checkbox.addEventListener(
-                "change",
-                () => {
-
-                    updateSelectAllButton();
-
-                    updateSelectedCount();
-
-                }
-            );
-
+    document.querySelectorAll(".kanji-checkbox").forEach(checkbox => {
+        checkbox.addEventListener("change", () => {
+            updateSelectAllButton();
+            updateSelectedCount();
         });
-
+    });
 }
-
 
 /* =========================================================
    MODE
 ========================================================= */
 
 function setupModeSelection() {
-
-    const modeInputs =
-        document.querySelectorAll(
-            'input[name="quizMode"]'
-        );
-
-
+    const modeInputs = document.querySelectorAll('input[name="quizMode"]');
     modeInputs.forEach(input => {
+        input.addEventListener("change", () => {
+            currentMode = input.value;
+            const modeOptions = document.querySelectorAll('.mode-option');
+            modeOptions.forEach((option, index) => {
+                if (modeInputs[index].checked) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        });
+    });
+}
 
-        input.addEventListener(
-            "change",
-            () => {
+/* =========================================================
+   TOUT SELECTIONNER / DESELECTIONNER
+========================================================= */
 
-                currentMode =
-                    input.value;
+selectAllBtn.addEventListener("click", () => {
+    const checkboxes = Array.from(document.querySelectorAll(".kanji-checkbox"));
+    if (checkboxes.length === 0) return;
 
-
-            }
-        );
-
+    const allSelected = checkboxes.every(checkbox => checkbox.checked);
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = !allSelected;
     });
 
-}
-
-
-/* =========================================================
-   TOUT SELECTIONNER
-========================================================= */
-
-selectAllBtn.addEventListener(
-    "click",
-    () => {
-
-        const checkboxes =
-            [
-                ...document.querySelectorAll(
-                    ".kanji-checkbox"
-                )
-            ];
-
-
-        if (checkboxes.length === 0) {
-            return;
-        }
-
-
-        const allSelected =
-            checkboxes.every(
-                checkbox =>
-                    checkbox.checked
-            );
-
-
-        /*
-            Si tout est déjà sélectionné :
-            on désélectionne tout.
-
-            Sinon :
-            on sélectionne tout.
-        */
-
-        checkboxes.forEach(
-            checkbox => {
-
-                checkbox.checked =
-                    !allSelected;
-
-            }
-        );
-
-
-        updateSelectAllButton();
-
-        updateSelectedCount();
-
-    }
-);
-
-
-/* =========================================================
-   TEXTE DU BOUTON SELECT ALL
-========================================================= */
+    updateSelectAllButton();
+    updateSelectedCount();
+});
 
 function updateSelectAllButton() {
+    const checkboxes = Array.from(document.querySelectorAll(".kanji-checkbox"));
+    if (checkboxes.length === 0) return;
 
-    const checkboxes =
-        [
-            ...document.querySelectorAll(
-                ".kanji-checkbox"
-            )
-        ];
-
-
-    if (checkboxes.length === 0) {
-        return;
-    }
-
-
-    const allSelected =
-        checkboxes.every(
-            checkbox =>
-                checkbox.checked
-        );
-
-
+    const allSelected = checkboxes.every(checkbox => checkbox.checked);
     if (allSelected) {
-
-        selectAllBtn.innerHTML = `
-            <span class="btn-icon">
-                
-            </span>
-
-            Tout désélectionner
-        `;
-
+        selectAllBtn.innerHTML = `<span class="btn-icon"></span>Tout désélectionner`;
     } else {
-
-        selectAllBtn.innerHTML = `
-            <span class="btn-icon">
-                
-            </span>
-
-            Tout sélectionner
-        `;
-
+        selectAllBtn.innerHTML = `<span class="btn-icon"></span>Tout sélectionner`;
     }
-
 }
-
-
-/* =========================================================
-   COMPTEUR
-========================================================= */
 
 function updateSelectedCount() {
-
-    const checkboxes =
-        [
-            ...document.querySelectorAll(
-                ".kanji-checkbox"
-            )
-        ];
-
-
-    const count =
-        checkboxes.filter(
-            checkbox =>
-                checkbox.checked
-        ).length;
-
-
-    selectedCount.textContent =
-        `${count} sélectionné${count > 1 ? "s" : ""}`;
-
+    const checkboxes = Array.from(document.querySelectorAll(".kanji-checkbox"));
+    const count = checkboxes.filter(checkbox => checkbox.checked).length;
+    selectedCount.textContent = `${count} sélectionné${count > 1 ? "s" : ""}`;
 }
-
 
 /* =========================================================
    KANJI SELECTIONNES
 ========================================================= */
 
 function getSelectedKanji() {
-
-    const checkboxes =
-        document.querySelectorAll(
-            ".kanji-checkbox"
-        );
-
-
-    return [
-        ...checkboxes
-    ]
-        .filter(
-            checkbox =>
-                checkbox.checked
-        )
-        .map(
-            checkbox =>
-                KANJI_DATA[
-                    Number(
-                        checkbox.dataset.index
-                    )
-                ]
-        );
-
+    const checkboxes = Array.from(document.querySelectorAll(".kanji-checkbox"));
+    return checkboxes
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => KANJI_DATA[Number(checkbox.dataset.index)]);
 }
-
 
 /* =========================================================
    START QUIZ
 ========================================================= */
 
-startQuizBtn.addEventListener(
-    "click",
-    startQuiz
-);
-
+startQuizBtn.addEventListener("click", startQuiz);
 
 function startQuiz() {
-
-    selectedKanji =
-        getSelectedKanji();
-
-
-    if (
-        selectedKanji.length === 0
-    ) {
-
-        alert(
-            "Sélectionne au moins un kanji."
-        );
-
+    selectedKanji = getSelectedKanji();
+    if (selectedKanji.length === 0) {
+        alert("Sélectionne au moins un kanji.");
         return;
-
     }
 
-
-    const usableKanji =
-        selectedKanji.filter(
-            kanji => {
-
-                return getAnswersForKanji(
-                    kanji
-                ).length > 0;
-
-            }
-        );
-
-
-    if (
-        usableKanji.length === 0
-    ) {
-
-        alert(
-            "Aucun kanji sélectionné ne possède de données pour ce mode."
-        );
-
+    const usableKanji = selectedKanji.filter(kanji => getAnswersForKanji(kanji).length > 0);
+    if (usableKanji.length === 0) {
+        alert("Aucun kanji sélectionné ne possède de données pour ce mode.");
         return;
-
     }
 
-
-    quizQuestions =
-        shuffle(
-            [...usableKanji]
-        );
-
-
+    quizQuestions = shuffle([...usableKanji]);
     currentQuestionIndex = 0;
-
     score = 0;
 
-
-    configScreen.classList.add(
-        "hidden"
-    );
-
-
-    finalScreen.classList.add(
-        "hidden"
-    );
-
-
-    quizScreen.classList.remove(
-        "hidden"
-    );
-
+    configScreen.classList.add("hidden");
+    finalScreen.classList.add("hidden");
+    quizScreen.classList.remove("hidden");
 
     showQuestion();
-
 }
 
-
-/* =========================================================
-   REPONSES
-========================================================= */
-
-function getAnswersForKanji(
-    kanji
-) {
-
+function getAnswersForKanji(kanji) {
     const answers = [];
-
-
     switch (currentMode) {
-
         case "meanings":
-
-            return (kanji.meanings || []).map(escapeHtml);
-
+            return getKanjiMeanings(kanji);
 
         case "on_readings":
-
             (kanji.on_readings || []).forEach(reading => {
-
-                /* Ajoute la lecture japonaise */
-                answers.push(escapeHtml(reading));
-
-
-                /* Ajoute la transcription romaji */
+                const cleanReading = reading.replace(/[.-]/g, '');
+                answers.push(cleanReading);
                 try {
-                    const romaji = wanakana.toRomaji(reading);
-                    if (romaji) {
-                        answers.push(romaji.toLowerCase());
+                    if (wanakana) {
+                        const romaji = wanakana.toRomaji(cleanReading);
+                        if (romaji) answers.push(romaji.toLowerCase());
                     }
                 } catch (e) {
                     console.warn("Erreur wanakana:", e);
                 }
-
             });
-
-
             return answers;
-
 
         case "kun_readings":
-
             (kanji.kun_readings || []).forEach(reading => {
-
-                /* Ajoute la lecture japonaise */
-                answers.push(escapeHtml(reading));
-
-
-                /* Ajoute la transcription romaji */
+                const cleanReading = reading.replace(/[.-]/g, '');
+                answers.push(cleanReading);
                 try {
-                    const romaji = wanakana.toRomaji(reading);
-                    if (romaji) {
-                        answers.push(romaji.toLowerCase());
+                    if (wanakana) {
+                        const romaji = wanakana.toRomaji(cleanReading);
+                        if (romaji) answers.push(romaji.toLowerCase());
                     }
                 } catch (e) {
                     console.warn("Erreur wanakana:", e);
                 }
-
             });
-
-
             return answers;
 
-
         default:
-
             return [];
-
     }
-
 }
-
 
 /* =========================================================
    QUESTION TEXT
 ========================================================= */
 
 function getQuestionText() {
-
     switch (currentMode) {
-
         case "meanings":
-
-            return (
-                "Quelle est la signification de ce kanji ?"
-            );
-
-
+            return "Quelle est la signification de ce kanji ?";
         case "on_readings":
-
-            return (
-                "Quelle est sa lecture On'yomi ?"
-            );
-
-
+            return "Quelle est sa lecture On'yomi ?";
         case "kun_readings":
-
-            return (
-                "Quelle est sa lecture Kun'yomi ?"
-            );
-
-
+            return "Quelle est sa lecture Kun'yomi ?";
         default:
-
             return "Quelle est la réponse ?";
-
     }
-
 }
-
 
 /* =========================================================
    AFFICHER QUESTION
 ========================================================= */
 
 function showQuestion() {
-
-    const question =
-        quizQuestions[
-            currentQuestionIndex
-        ];
-
-
+    const question = quizQuestions[currentQuestionIndex];
     answerValidated = false;
 
+    questionKanji.textContent = question.kanji;
+    questionText.textContent = getQuestionText();
 
-    questionKanji.textContent =
-        question.kanji;
+    const current = currentQuestionIndex + 1;
+    const total = quizQuestions.length;
 
-
-    questionText.textContent =
-        getQuestionText();
-
-
-    const current =
-        currentQuestionIndex + 1;
-
-
-    const total =
-        quizQuestions.length;
-
-
-    progress.textContent =
-        `Question ${current} / ${total}`;
-
-
-    progressFill.style.width =
-        `${(current / total) * 100}%`;
-
-
-    scoreElement.textContent =
-        `Score : ${score}`;
-
+    progress.textContent = `Question ${current} / ${total}`;
+    progressFill.style.width = `${(current / total) * 100}%`;
+    scoreElement.textContent = `Score : ${score}`;
 
     answerInput.value = "";
-
     answerInput.disabled = false;
 
-
-    result.className =
-        "result hidden";
-
-
+    result.className = "result hidden";
     result.innerHTML = "";
 
+    submitAnswerBtn.classList.remove("hidden");
+    nextQuestionBtn.classList.add("hidden");
 
-    submitAnswerBtn.classList.remove(
-        "hidden"
-    );
-
-
-    nextQuestionBtn.classList.add(
-        "hidden"
-    );
-
-
-    setTimeout(
-        () => answerInput.focus(),
-        50
-    );
-
+    setTimeout(() => answerInput.focus(), 50);
 }
-
 
 /* =========================================================
    VALIDATION
 ========================================================= */
 
-submitAnswerBtn.addEventListener(
-    "click",
-    validateAnswer
-);
+submitAnswerBtn.addEventListener("click", validateAnswer);
 
+answerInput.addEventListener("keydown", event => {
+    if (event.key !== "Enter") return;
 
-answerInput.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key !== "Enter"
-        ) {
-            return;
-        }
-
-
-        if (!answerValidated) {
-
-            validateAnswer();
-
-        } else {
-
-            nextQuestion();
-
-        }
-
+    if (!answerValidated) {
+        validateAnswer();
+    } else {
+        nextQuestion();
     }
-);
-
+});
 
 function validateAnswer() {
+    if (answerValidated) return;
 
-    if (answerValidated) {
-        return;
-    }
-
-
-    const userAnswer =
-        normalizeAnswer(
-            answerInput.value
-        );
-
-
+    const userAnswer = normalizeAnswer(answerInput.value);
     if (!userAnswer) {
-
-        alert(
-            "Entre une réponse."
-        );
-
+        alert("Entre une réponse.");
         answerInput.focus();
-
         return;
-
     }
 
+    const question = quizQuestions[currentQuestionIndex];
+    const correctAnswers = getAnswersForKanji(question);
+    const normalizedCorrectAnswers = correctAnswers.map(normalizeAnswer);
 
-    const question =
-        quizQuestions[
-            currentQuestionIndex
-        ];
-
-
-    const correctAnswers =
-        getAnswersForKanji(
-            question
-        );
-
-
-    /*
-        La fonction normalizeAnswer ne supprime que les accents.
-        
-        Pour la validation, on compare le user answer 
-        avec les réponses correctes déjà normalisées.
-    */
-
-    const normalizedCorrectAnswers =
-        correctAnswers.map(
-            normalizeAnswer
-        );
-
-
-    const isCorrect =
-        normalizedCorrectAnswers.includes(
-            userAnswer
-        );
-
+    const isCorrect = normalizedCorrectAnswers.includes(userAnswer);
 
     answerValidated = true;
-
-
     answerInput.disabled = true;
 
-
-    submitAnswerBtn.classList.add(
-        "hidden"
-    );
-
-
-    nextQuestionBtn.classList.remove(
-        "hidden"
-    );
-
+    submitAnswerBtn.classList.add("hidden");
+    nextQuestionBtn.classList.remove("hidden");
 
     if (isCorrect) {
-
         score++;
-
-
-        result.className =
-            "result correct";
-
-
+        result.className = "result correct";
         result.innerHTML = `
-
-            <div class="result-title">
-                ✓ Correct !
-            </div>
-
-            <div>
-                Bonne réponse :
-            </div>
-
-            <div class="correct-answer">
-
-                ${correctAnswers
-                    .map(
-                        escapeHtml
-                    )
-                    .join(" / ")
-                }
-
-            </div>
-
+            <div class="result-title">✓ Correct !</div>
+            <div>Bonne réponse :</div>
+            <div class="correct-answer">${correctAnswers.map(escapeHtml).join(" / ")}</div>
             ${getReadingsHtml(question)}
-
         `;
-
     } else {
-
-        result.className =
-            "result incorrect";
-
-
+        result.className = "result incorrect";
         result.innerHTML = `
-
-            <div class="result-title">
-                ✗ Incorrect
-            </div>
-
-            <div>
-                La réponse attendue était :
-            </div>
-
-            <div class="correct-answer">
-
-                ${correctAnswers
-                    .map(
-                        escapeHtml
-                    )
-                    .join(" / ")
-                }
-
-            </div>
-
+            <div class="result-title">✗ Incorrect</div>
+            <div>La réponse attendue était :</div>
+            <div class="correct-answer">${correctAnswers.map(escapeHtml).join(" / ")}</div>
             ${getReadingsHtml(question)}
-
         `;
-
     }
 
-
-    scoreElement.textContent =
-        `Score : ${score}`;
-
+    scoreElement.textContent = `Score : ${score}`;
 }
-
 
 /* =========================================================
    AFFICHAGE DES LECTURES
-=========================================================
-
-   IMPORTANT :
-
-   En mode Meaning :
-   on affiche Kun + On.
-
-   Cela permet par exemple :
-
-       一
-
-       Correct : one
-
-       Kun : ひと- / ひと.つ
-       On  : イチ / イツ
-
 ========================================================= */
 
-function getReadingsHtml(
-    kanji
-) {
+function getReadingsHtml(kanji) {
+    const kunReadings = kanji.kun_readings || [];
+    const onReadings = kanji.on_readings || [];
 
-    /*
-        On affiche les lectures
-        particulièrement en mode Meaning.
-
-        On peut également les afficher
-        dans les autres modes.
-    */
-
-    const kunReadings =
-        kanji.kun_readings || [];
-
-
-    const onReadings =
-        kanji.on_readings || [];
-
-
-    if (
-        kunReadings.length === 0 &&
-        onReadings.length === 0
-    ) {
-
+    if (kunReadings.length === 0 && onReadings.length === 0) {
         return "";
-
     }
 
-
     return `
-
         <div class="readings-container">
-
-            <div class="readings-title">
-
-                📖 Lectures du kanji
-
-            </div>
-
-
-            ${
-                kunReadings.length > 0
-                    ? `
-                        <div class="reading-group">
-
-                            <span class="reading-label">
-                                Kun:
-                            </span>
-
-                            ${kunReadings
-                                .map(
-                                    reading => `
-                                        <span class="kana">
-                                            ${escapeHtml(
-                                                reading
-                                            )}
-                                        </span>
-                                    `
-                                )
-                                .join("")
-                            }
-
-                        </div>
-                    `
-                    : ""
-            }
-
-
-            ${
-                onReadings.length > 0
-                    ? `
-                        <div class="reading-group">
-
-                            <span class="reading-label">
-                                On:
-                            </span>
-
-                            ${onReadings
-                                .map(
-                                    reading => `
-                                        <span class="kana">
-                                            ${escapeHtml(
-                                                reading
-                                            )}
-                                        </span>
-                                    `
-                                )
-                                .join("")
-                            }
-
-                        </div>
-                    `
-                    : ""
-            }
-
+            <div class="readings-title">📖 Lectures du kanji</div>
+            ${kunReadings.length > 0 ? `
+                <div class="reading-group">
+                    <span class="reading-label">Kun:</span>
+                    ${kunReadings.map(r => `<span class="kana">${escapeHtml(r)}</span>`).join("")}
+                </div>
+            ` : ""}
+            ${onReadings.length > 0 ? `
+                <div class="reading-group">
+                    <span class="reading-label">On:</span>
+                    ${onReadings.map(r => `<span class="kana">${escapeHtml(r)}</span>`).join("")}
+                </div>
+            ` : ""}
         </div>
-
     `;
-
 }
-
 
 /* =========================================================
    QUESTION SUIVANTE
 ========================================================= */
 
-nextQuestionBtn.addEventListener(
-    "click",
-    nextQuestion
-);
-
+nextQuestionBtn.addEventListener("click", nextQuestion);
 
 function nextQuestion() {
-
     currentQuestionIndex++;
-
-
-    if (
-        currentQuestionIndex >=
-        quizQuestions.length
-    ) {
-
+    if (currentQuestionIndex >= quizQuestions.length) {
         showFinalScreen();
-
         return;
-
     }
-
-
     showQuestion();
-
 }
-
 
 /* =========================================================
    ECRAN FINAL
 ========================================================= */
 
 function showFinalScreen() {
+    quizScreen.classList.add("hidden");
+    finalScreen.classList.remove("hidden");
 
-    quizScreen.classList.add(
-        "hidden"
-    );
+    const total = quizQuestions.length;
+    finalScoreNumber.textContent = `${score} / ${total}`;
 
-
-    finalScreen.classList.remove(
-        "hidden"
-    );
-
-
-    const total =
-        quizQuestions.length;
-
-
-    finalScoreNumber.textContent =
-        `${score} / ${total}`;
-
-
-    const percentage =
-        Math.round(
-            (score / total) * 100
-        );
-
+    const percentage = Math.round((score / total) * 100);
 
     if (percentage === 100) {
-
-        finalMessage.textContent =
-            "🎉 Parfait ! Toutes les réponses sont correctes.";
-
+        finalMessage.textContent = "🎉 Parfait ! Toutes les réponses sont correctes.";
     } else if (percentage >= 80) {
-
-        finalMessage.textContent =
-            "👏 Excellent travail !";
-
+        finalMessage.textContent = "👏 Excellent travail !";
     } else if (percentage >= 60) {
-
-        finalMessage.textContent =
-            "👍 Très bien ! Continue comme ça.";
-
+        finalMessage.textContent = "👍 Très bien ! Continue comme ça.";
     } else {
-
-        finalMessage.textContent =
-            "💪 Continue à t'entraîner !";
-
+        finalMessage.textContent = "💪 Continue à t'entraîner !";
     }
-
 }
-
 
 /* =========================================================
    RECOMMENCER
 ========================================================= */
 
-restartBtn.addEventListener(
-    "click",
-    () => {
-
-        finalScreen.classList.add(
-            "hidden"
-        );
-
-
-        configScreen.classList.remove(
-            "hidden"
-        );
-
-    }
-);
-
+restartBtn.addEventListener("click", () => {
+    finalScreen.classList.add("hidden");
+    configScreen.classList.remove("hidden");
+});
 
 /* =========================================================
    OUTILS
 ========================================================= */
 
 function shuffle(array) {
-
-    const result =
-        [...array];
-
-
-    for (
-        let i = result.length - 1;
-        i > 0;
-        i--
-    ) {
-
-        const j =
-            Math.floor(
-                Math.random() * (i + 1)
-            );
-
-
-        [
-            result[i],
-            result[j]
-        ] = [
-            result[j],
-            result[i]
-        ];
-
+    const res = [...array];
+    for (let i = res.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [res[i], res[j]] = [res[j], res[i]];
     }
-
-
-    return result;
-
+    return res;
 }
 
-
-function normalizeAnswer(
-    value
-) {
-
-    return value
-        .trim()
-        .toLowerCase()
-        .replace(
-            /\s+/g,
-            " "
-        );
-
+function normalizeAnswer(value) {
+    return value.trim().toLowerCase().replace(/\s+/g, " ");
 }
 
-
-function escapeHtml(
-    value
-) {
-
+function escapeHtml(value) {
     return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
-
 
 /* =========================================================
    INITIALISATION
 ========================================================= */
 
 setupModeSelection();
-
 loadKanjiData();
 
 </script>

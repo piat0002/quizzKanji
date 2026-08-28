@@ -5,3 +5,8 @@ pour acceder un exemple du site https://piat0002.github.io/quizzKanji/
 
 
 si non je vous recommende d'utiliser live server pour tester en local
+
+j'ai utiliser 
+https://kanjiapi.dev/#!/documentation
+https://libretranslate.com/
+https://wanakana.com/
