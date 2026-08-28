@@ -37,7 +37,7 @@
     <section id="configScreen" class="hidden">
         <h2 class="section-title">Configure ton quiz</h2>
         <p class="section-description">
-            Choisis le type de réponse que tu veux travailler.
+            Choisis le type de réponse et filtre tes thèmes.
         </p>
 
         <!-- Niveau sélectionné -->
@@ -68,6 +68,23 @@
                 <div class="mode-title">Kun readings</div>
                 <div class="mode-description">訓読み</div>
             </label>
+        </div>
+
+        <!-- RECHERCHE DE THEMES -->
+        <div class="theme-section">
+            <h3>Filtrer par thèmes</h3>
+            <div class="theme-buttons">
+                <button id="selectEssentialThemesBtn" class="btn btn-secondary" type="button">⭐ Thèmes essentiels</button>
+                <button id="selectAllThemesBtn" class="btn btn-secondary" type="button">Tous les thèmes</button>
+                <button id="clearAllThemesBtn" class="btn btn-secondary" type="button">Effacer les thèmes</button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="themeSearchInput" class="theme-search-input" placeholder="Tape un thème (ex: nombre, nature, action)..." autocomplete="off">
+                <div id="themeSuggestions" class="theme-suggestions"></div>
+            </div>
+
+            <div id="selectedThemesContainer" class="selected-themes-container"></div>
         </div>
 
         <!-- SELECTION KANJI -->
@@ -151,7 +168,7 @@
 
 <script>
 /* =========================================================
-   CONFIGURATION
+   CONFIGURATION & CONSTANTES
 ========================================================= */
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -167,8 +184,13 @@ const LEVEL_FILES = {
     'n5': 'kanjis-n5.json'
 };
 
+const ESSENTIAL_THEMES = [
+    "nombre", "école", "éducation", "nature", 
+    "temps", "famille", "action", "corps humain", "quotidien"
+];
+
 /* =========================================================
-   VARIABLES DU QUIZ
+   VARIABLES DU QUIZ ET DES THEMES
 ========================================================= */
 
 let currentMode = "meanings";
@@ -178,6 +200,9 @@ let quizQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
 let answerValidated = false;
+
+let ALL_THEMES = [];
+let ACTIVE_THEMES = new Set();
 
 /* =========================================================
    ELEMENTS HTML
@@ -189,6 +214,12 @@ const configScreen = document.getElementById("configScreen");
 const quizScreen = document.getElementById("quizScreen");
 const finalScreen = document.getElementById("finalScreen");
 const kanjiList = document.getElementById("kanjiList");
+const themeSearchInput = document.getElementById("themeSearchInput");
+const themeSuggestions = document.getElementById("themeSuggestions");
+const selectedThemesContainer = document.getElementById("selectedThemesContainer");
+const selectAllThemesBtn = document.getElementById("selectAllThemesBtn");
+const clearAllThemesBtn = document.getElementById("clearAllThemesBtn");
+const selectEssentialThemesBtn = document.getElementById("selectEssentialThemesBtn");
 const selectAllBtn = document.getElementById("selectAllBtn");
 const selectedCount = document.getElementById("selectedCount");
 const startQuizBtn = document.getElementById("startQuizBtn");
@@ -208,7 +239,7 @@ const levelDisplay = document.getElementById("levelDisplay");
 const kanjiCount = document.getElementById("kanjiCount");
 
 /* =========================================================
-   CHARGEMENT JSON
+   CHARGEMENT DATA
 ========================================================= */
 
 async function loadKanjiData() {
@@ -218,18 +249,15 @@ async function loadKanjiData() {
         levelDisplay.textContent = currentLevel.toUpperCase();
         
         const response = await fetch(DATA_BASE_URL + dataFileName);
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`Erreur HTTP ${response.status}`);
         
         const data = await response.json();
-        if (!Array.isArray(data)) {
-            throw new Error("Le fichier JSON doit contenir un tableau.");
-        }
+        if (!Array.isArray(data)) throw new Error("Le fichier JSON doit contenir un tableau.");
         
         KANJI_DATA = data;
         kanjiCount.textContent = data.length.toLocaleString('fr-FR');
         
+        initThemes();
         renderKanjiList();
         updateSelectAllButton();
         updateSelectedCount();
@@ -250,16 +278,117 @@ async function loadKanjiData() {
 }
 
 /* =========================================================
+   SYSTEME DE RECHERCHE DE THEMES & TAGS
+========================================================= */
+
+function initThemes() {
+    const themesSet = new Set();
+    KANJI_DATA.forEach(k => {
+        if (Array.isArray(k.themes)) {
+            k.themes.forEach(t => themesSet.add(t));
+        }
+    });
+    ALL_THEMES = Array.from(themesSet).sort((a, b) => a.localeCompare(b, 'fr'));
+    
+    // Par défaut, tous les thèmes sont activés
+    ACTIVE_THEMES = new Set(ALL_THEMES);
+    renderSelectedThemes();
+}
+
+function renderSelectedThemes() {
+    selectedThemesContainer.innerHTML = "";
+    ACTIVE_THEMES.forEach(theme => {
+        const tag = document.createElement("span");
+        tag.className = "theme-tag";
+        tag.innerHTML = `${escapeHtml(theme)} <span class="remove-tag">&times;</span>`;
+        tag.addEventListener("click", () => removeTheme(theme));
+        selectedThemesContainer.appendChild(tag);
+    });
+    syncKanjiWithThemes();
+}
+
+function addTheme(theme) {
+    ACTIVE_THEMES.add(theme);
+    themeSearchInput.value = "";
+    themeSuggestions.classList.remove("active");
+    renderSelectedThemes();
+}
+
+function removeTheme(theme) {
+    ACTIVE_THEMES.delete(theme);
+    renderSelectedThemes();
+}
+
+themeSearchInput.addEventListener("input", () => {
+    const query = themeSearchInput.value.trim().toLowerCase();
+    if (!query) {
+        themeSuggestions.classList.remove("active");
+        return;
+    }
+
+    const matches = ALL_THEMES.filter(t => 
+        t.toLowerCase().includes(query) && !ACTIVE_THEMES.has(t)
+    );
+
+    if (matches.length === 0) {
+        themeSuggestions.classList.remove("active");
+        return;
+    }
+
+    themeSuggestions.innerHTML = "";
+    matches.forEach(theme => {
+        const item = document.createElement("div");
+        item.className = "suggestion-item";
+        item.textContent = theme;
+        item.addEventListener("click", () => addTheme(theme));
+        themeSuggestions.appendChild(item);
+    });
+    themeSuggestions.classList.add("active");
+});
+
+document.addEventListener("click", (e) => {
+    if (!e.target.closest(".search-container")) {
+        themeSuggestions.classList.remove("active");
+    }
+});
+
+selectEssentialThemesBtn.addEventListener("click", () => {
+    ACTIVE_THEMES = new Set(ALL_THEMES.filter(t => ESSENTIAL_THEMES.includes(t)));
+    renderSelectedThemes();
+});
+
+selectAllThemesBtn.addEventListener("click", () => {
+    ACTIVE_THEMES = new Set(ALL_THEMES);
+    renderSelectedThemes();
+});
+
+clearAllThemesBtn.addEventListener("click", () => {
+    ACTIVE_THEMES.clear();
+    renderSelectedThemes();
+});
+
+function syncKanjiWithThemes() {
+    document.querySelectorAll(".kanji-checkbox").forEach(cb => {
+        const index = Number(cb.dataset.index);
+        const kanji = KANJI_DATA[index];
+        const kanjiThemes = kanji.themes || [];
+
+        const matchesTheme = kanjiThemes.some(t => ACTIVE_THEMES.has(t));
+        cb.checked = matchesTheme;
+    });
+
+    updateSelectAllButton();
+    updateSelectedCount();
+}
+
+/* =========================================================
    HELPER : EXTRAIRE LES SIGNIFICATIONS (FR + EN)
 ========================================================= */
 
 function getKanjiMeanings(kanji) {
     const frenchMeanings = (kanji.meanings_french || []).flat();
     const englishMeanings = kanji.meanings || [];
-    
-    // Combine les réponses en évitant les doublons
-    const combined = [...frenchMeanings, ...englishMeanings];
-    return Array.from(new Set(combined));
+    return Array.from(new Set([...frenchMeanings, ...englishMeanings]));
 }
 
 /* =========================================================
@@ -269,7 +398,6 @@ function getKanjiMeanings(kanji) {
 function renderKanjiList() {
     kanjiList.innerHTML = "";
     KANJI_DATA.forEach((kanji, index) => {
-        // Pour l'affichage de la liste, on préfère le FR s'il existe, sinon l'EN
         const displayMeanings = (kanji.meanings_french && kanji.meanings_french.length > 0)
             ? kanji.meanings_french.flat()
             : (kanji.meanings || []);
@@ -296,7 +424,7 @@ function renderKanjiList() {
 }
 
 /* =========================================================
-   MODE
+   GESTION DES MODES ET SELECTIONS
 ========================================================= */
 
 function setupModeSelection() {
@@ -306,28 +434,18 @@ function setupModeSelection() {
             currentMode = input.value;
             const modeOptions = document.querySelectorAll('.mode-option');
             modeOptions.forEach((option, index) => {
-                if (modeInputs[index].checked) {
-                    option.classList.add('selected');
-                } else {
-                    option.classList.remove('selected');
-                }
+                option.classList.toggle('selected', modeInputs[index].checked);
             });
         });
     });
 }
 
-/* =========================================================
-   TOUT SELECTIONNER / DESELECTIONNER
-========================================================= */
-
 selectAllBtn.addEventListener("click", () => {
     const checkboxes = Array.from(document.querySelectorAll(".kanji-checkbox"));
     if (checkboxes.length === 0) return;
 
-    const allSelected = checkboxes.every(checkbox => checkbox.checked);
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = !allSelected;
-    });
+    const allSelected = checkboxes.every(cb => cb.checked);
+    checkboxes.forEach(cb => cb.checked = !allSelected);
 
     updateSelectAllButton();
     updateSelectedCount();
@@ -337,33 +455,25 @@ function updateSelectAllButton() {
     const checkboxes = Array.from(document.querySelectorAll(".kanji-checkbox"));
     if (checkboxes.length === 0) return;
 
-    const allSelected = checkboxes.every(checkbox => checkbox.checked);
-    if (allSelected) {
-        selectAllBtn.innerHTML = `<span class="btn-icon"></span>Tout désélectionner`;
-    } else {
-        selectAllBtn.innerHTML = `<span class="btn-icon"></span>Tout sélectionner`;
-    }
+    const allSelected = checkboxes.every(cb => cb.checked);
+    selectAllBtn.innerHTML = `<span class="btn-icon"></span>${allSelected ? "Tout désélectionner" : "Tout sélectionner"}`;
 }
 
 function updateSelectedCount() {
     const checkboxes = Array.from(document.querySelectorAll(".kanji-checkbox"));
-    const count = checkboxes.filter(checkbox => checkbox.checked).length;
+    const count = checkboxes.filter(cb => cb.checked).length;
     selectedCount.textContent = `${count} sélectionné${count > 1 ? "s" : ""}`;
 }
-
-/* =========================================================
-   KANJI SELECTIONNES
-========================================================= */
 
 function getSelectedKanji() {
     const checkboxes = Array.from(document.querySelectorAll(".kanji-checkbox"));
     return checkboxes
-        .filter(checkbox => checkbox.checked)
-        .map(checkbox => KANJI_DATA[Number(checkbox.dataset.index)]);
+        .filter(cb => cb.checked)
+        .map(cb => KANJI_DATA[Number(cb.dataset.index)]);
 }
 
 /* =========================================================
-   START QUIZ
+   LOGIQUE DU QUIZ
 ========================================================= */
 
 startQuizBtn.addEventListener("click", startQuiz);
@@ -433,10 +543,6 @@ function getAnswersForKanji(kanji) {
     }
 }
 
-/* =========================================================
-   QUESTION TEXT
-========================================================= */
-
 function getQuestionText() {
     switch (currentMode) {
         case "meanings":
@@ -449,10 +555,6 @@ function getQuestionText() {
             return "Quelle est la réponse ?";
     }
 }
-
-/* =========================================================
-   AFFICHER QUESTION
-========================================================= */
 
 function showQuestion() {
     const question = quizQuestions[currentQuestionIndex];
@@ -480,15 +582,10 @@ function showQuestion() {
     setTimeout(() => answerInput.focus(), 50);
 }
 
-/* =========================================================
-   VALIDATION
-========================================================= */
-
 submitAnswerBtn.addEventListener("click", validateAnswer);
 
 answerInput.addEventListener("keydown", event => {
     if (event.key !== "Enter") return;
-
     if (!answerValidated) {
         validateAnswer();
     } else {
@@ -540,17 +637,11 @@ function validateAnswer() {
     scoreElement.textContent = `Score : ${score}`;
 }
 
-/* =========================================================
-   AFFICHAGE DES LECTURES
-========================================================= */
-
 function getReadingsHtml(kanji) {
     const kunReadings = kanji.kun_readings || [];
     const onReadings = kanji.on_readings || [];
 
-    if (kunReadings.length === 0 && onReadings.length === 0) {
-        return "";
-    }
+    if (kunReadings.length === 0 && onReadings.length === 0) return "";
 
     return `
         <div class="readings-container">
@@ -571,10 +662,6 @@ function getReadingsHtml(kanji) {
     `;
 }
 
-/* =========================================================
-   QUESTION SUIVANTE
-========================================================= */
-
 nextQuestionBtn.addEventListener("click", nextQuestion);
 
 function nextQuestion() {
@@ -585,10 +672,6 @@ function nextQuestion() {
     }
     showQuestion();
 }
-
-/* =========================================================
-   ECRAN FINAL
-========================================================= */
 
 function showFinalScreen() {
     quizScreen.classList.add("hidden");
@@ -610,17 +693,13 @@ function showFinalScreen() {
     }
 }
 
-/* =========================================================
-   RECOMMENCER
-========================================================= */
-
 restartBtn.addEventListener("click", () => {
     finalScreen.classList.add("hidden");
     configScreen.classList.remove("hidden");
 });
 
 /* =========================================================
-   OUTILS
+   UTILITAIRES
 ========================================================= */
 
 function shuffle(array) {

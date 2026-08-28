@@ -1016,3 +1016,105 @@ body {
     justify-content: center;
     flex-wrap: wrap;
 }
+
+.theme-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.theme-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.search-container {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+/* Champ de recherche */
+.theme-search-input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 2px solid #ddd;
+    background: #ffffff;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+.theme-search-input:focus {
+    outline: none;
+    border-color: #a78bfa; /* Bordure violet clair au focus */
+}
+
+/* Liste de suggestions (fond violet très clair) */
+.theme-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #f5f3ff; /* Fond violet pastel très doux */
+    border: 2px solid #ddd6fe; /* Bordure violette légère */
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: none;
+}
+
+.theme-suggestions.active {
+    display: block;
+}
+
+.suggestion-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #4c1d95; /* Texte violet foncé très lisible */
+    text-align: left;
+    font-weight: 500;
+}
+
+.suggestion-item:hover {
+    background: #ede9fe; /* Violet légèrement plus soutenu au survol */
+    color: #5b21b6;
+}
+
+/* Badges / Tags des thèmes sélectionnés (Violet clair) */
+.selected-themes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 32px;
+}
+
+.theme-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #a78bfa; /* Violet clair */
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.theme-tag:hover {
+    background: #8b5cf6; /* Violet un cran plus foncé au survol */
+}
+
+.theme-tag .remove-tag {
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1;
+}
