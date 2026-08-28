@@ -597,16 +597,30 @@ function validateAnswer() {
     if (answerValidated) return;
 
     const userAnswer = normalizeAnswer(answerInput.value);
+    const question = quizQuestions[currentQuestionIndex];
+    const correctAnswers = getAnswersForKanji(question);
+
+    // Si aucune réponse n'est saisie :
+    // on affiche directement la réponse et on permet de passer à la suivante.
     if (!userAnswer) {
-        alert("Entre une réponse.");
-        answerInput.focus();
+        answerValidated = true;
+        answerInput.disabled = true;
+
+        submitAnswerBtn.classList.add("hidden");
+        nextQuestionBtn.classList.remove("hidden");
+
+        result.className = "result incorrect";
+        result.innerHTML = `
+            <div class="result-title">⏭️ Pas de réponse</div>
+            <div>La réponse attendue était :</div>
+            <div class="correct-answer">${correctAnswers.map(escapeHtml).join(" / ")}</div>
+            ${getReadingsHtml(question)}
+        `;
+
         return;
     }
 
-    const question = quizQuestions[currentQuestionIndex];
-    const correctAnswers = getAnswersForKanji(question);
     const normalizedCorrectAnswers = correctAnswers.map(normalizeAnswer);
-
     const isCorrect = normalizedCorrectAnswers.includes(userAnswer);
 
     answerValidated = true;
@@ -636,6 +650,7 @@ function validateAnswer() {
 
     scoreElement.textContent = `Score : ${score}`;
 }
+
 
 function getReadingsHtml(kanji) {
     const kunReadings = kanji.kun_readings || [];
