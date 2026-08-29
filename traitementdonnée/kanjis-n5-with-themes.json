@@ -1006,11 +1006,12 @@
     "unicode": "5343",
     "meanings_french": [
       [
-        "en milliers"
+        "mille"
       ]
     ],
     "themes": [
-      "général"
+      "nombre",
+      "mathématiques"
     ]
   },
   {
@@ -1641,7 +1642,6 @@
     ],
     "themes": [
       "taille",
-      "nombre",
       "temps"
     ]
   },
@@ -2598,7 +2598,8 @@
     "unicode": "767E",
     "meanings_french": [
       [
-        "100"
+        "100",
+        "cent"
       ]
     ],
     "themes": [
