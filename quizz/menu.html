@@ -1,108 +1,127 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faire des Quiz - Niveau JLPT</title>
+    <title>Quiz japonais</title>
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/menuquizz.css">
+    <link rel="stylesheet" href="../css/menu-quiz.css">
+    
+    <style>
+        /* S'assure que l'animation fonctionne */
+        .kanji-level-section {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
+
 <body>
-    <div class="quiz-container">
-        <!-- Header -->
-        <header class="quiz-header">
-            <h1>⚡ Zone de Quiz</h1>
-            <p>Testez vos connaissances et amusez-vous !</p>
-        </header>
 
-        <!-- Info box conseils -->
-        <div class="info-box">
-            <h3>🎯 Comment utiliser les quiz :</h3>
-            <ul>
-                <li>Sélectionnez un niveau correspondant à votre niveau</li>
-                <li>Répondez aux questions le plus rapidement possible</li>
-                <li>Ne vous inquiétez pas des erreurs, c'est l'apprentissage !</li>
-                <li>Vous pouvez recommencer autant de fois que vous voulez</li>
-            </ul>
+<div class="container quiz-menu-page">
+
+    <header class="main-header">
+        <div class="logo">
+            <h1>🎌 Quiz japonais</h1>
         </div>
+        <p class="tagline">Choisis ce que tu veux réviser 🇯🇵</p>
+    </header>
 
-        <!-- Compteur total -->
-        <div class="counter-container">
-            <div class="counter-value">150+</div>
-            <div class="counter-label">quiz disponibles au total ! 🎉</div>
-        </div>
+    <h2 class="section-title">Que veux-tu travailler ?</h2>
+    <p class="section-description">Choisis une catégorie pour commencer ton quiz.</p>
 
-        <!-- Grille de quiz -->
-        <div class="quiz-grid">
-            <!-- Quiz N5 -->
-            <a href="../quizz/quiz.html" class="quiz-card" style="text-decoration: none;">
-                <span class="quiz-icon">🌱</span>
-                <h2>Quiz Niveau N5 (Débutant)</h2>
-                <p>Kanjis de base et vocabulaire simple<br>Durée : 5-10 minutes</p>
-                <span class="difficulty diff-easy">Facile 🟢</span>
-                <p><small>Niveau par défaut ou via level=n5</small></p>
-                
-                <!-- Statistiques simulées -->
-                <div class="quiz-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">25</div>
-                        <div class="stat-label">Questions</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">85%</div>
-                        <div class="stat-label">Moyenne</div>
-                    </div>
-                </div>
-            </a>
+    <div class="quiz-main-menu">
 
-            <!-- Quiz N4 -->
-            <a href="../quizz/quiz.html?level=n4" class="quiz-card" style="text-decoration: none;">
-                <span class="quiz-icon">🌿</span>
-                <h2>Quiz Niveau N4 (Débutant Intermédiaire)</h2>
-                <p>Kanjis intermédiaires et expressions<br>Durée : 10-15 minutes</p>
-                <span class="difficulty diff-medium">Moyen 🟡</span>
-                <p><small>Via level=n4</small></p>
-                
-                <!-- Statistiques simulées -->
-                <div class="quiz-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">40</div>
-                        <div class="stat-label">Questions</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">78%</div>
-                        <div class="stat-label">Moyenne</div>
-                    </div>
-                </div>
-            </a>
+        <!-- BOUTON KANJI (Ouvre le sous-menu) -->
+        <a href="#" class="main-menu-card kanji-menu-card" id="btn-kanji-toggle">
+            <div class="main-menu-icon">漢字</div>
+            <div class="main-menu-title">Kanji</div>
+            <div class="main-menu-japanese">漢字</div>
+            <div class="main-menu-description">
+                Révise les kanji japonais selon ton niveau JLPT.
+            </div>
+            <span class="main-menu-button">N5 · N4 · N3 ↓</span>
+        </a>
 
-            <!-- Quiz N3 -->
-            <a href="../quizz/quiz.html?level=n3" class="quiz-card" style="text-decoration: none;">
-                <span class="quiz-icon">🎋</span>
-                <h2>Quiz Niveau N3 (Intermédiaire)</h2>
-                <p>Kanjis avancés et grammaire complète<br>Durée : 15-20 minutes</p>
-                <span class="difficulty diff-medium">Difficile 🟠</span>
-                <p><small>Via level=n3</small></p>
-                
-                <!-- Statistiques simulées -->
-                <div class="quiz-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">55</div>
-                        <div class="stat-label">Questions</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">72%</div>
-                        <div class="stat-label">Moyenne</div>
-                    </div>
-                </div>
-            </a>
+        <!-- BOUTON VERBES (Lien direct) -->
+        <a href="verbes.html" class="main-menu-card verbes-menu-card">
+            <div class="main-menu-icon">動詞</div>
+            <div class="main-menu-title">Verbes</div>
+            <div class="main-menu-japanese">動詞</div>
+            <div class="main-menu-description">
+                Entraîne-toi sur les verbes japonais et leurs différentes formes.
+            </div>
+            <span class="main-menu-button">Commencer le quiz →</span>
+        </a>
 
-        <!-- Boutons de navigation -->
-        <nav class="nav-buttons">
-            <a href="../index.html" class="btn-back btn-home btn-nav">🏠 Page d'accueil</a>
-            <a href="../learn/menu.html" class="btn-back btn-learn btn-nav">📚 Apprendre les kanjis</a>
-        </nav>
     </div>
+
+    <!-- SECTION NIVEAUX KANJI (Masquée par display: none au départ) -->
+    <section id="kanji" class="kanji-level-section" style="display: none;">
+
+        <h2 class="section-title">漢字 — Choisis ton niveau</h2>
+        <p class="section-description">Sélectionne le niveau de kanji que tu souhaites réviser.</p>
+
+        <div class="kanji-level-grid">
+
+            <!-- N5 (aucun paramètre) -->
+            <a href="quiz.html" class="kanji-level-card level-n5">
+                <span class="kanji-level-icon">🌱</span>
+                <h3>N5</h3>
+                <p>Niveau débutant</p>
+                <span class="kanji-level-button">Commencer →</span>
+            </a>
+
+            <!-- N4 (?level=n4) -->
+            <a href="quiz.html?level=n4" class="kanji-level-card level-n4">
+                <span class="kanji-level-icon">📖</span>
+                <h3>N4</h3>
+                <p>Niveau intermédiaire</p>
+                <span class="kanji-level-button">Commencer →</span>
+            </a>
+
+            <!-- N3 (?level=n3) -->
+            <a href="quiz.html?level=n3" class="kanji-level-card level-n3">
+                <span class="kanji-level-icon">🔥</span>
+                <h3>N3</h3>
+                <p>Niveau avancé</p>
+                <span class="kanji-level-button">Commencer →</span>
+            </a>
+
+        </div>
+
+    </section>
+
+    <nav class="nav-buttons">
+        <a href="../index.html" class="btn-back btn-home">🏠 Page d'accueil</a>
+        <a href="../learn/menu.html" class="btn-back btn-learn">📚 Apprendre</a>
+    </nav>
+
+    <footer class="simple-footer">
+        Quiz japonais · 日本語を勉強しましょう 🇯🇵
+    </footer>
+
+</div>
+
+<!-- SCRIPT DE BASCULEMENT D'AFFICHAGE -->
+<script>
+    document.getElementById('btn-kanji-toggle').addEventListener('click', function(e) {
+        e.preventDefault();
+        const kanjiSection = document.getElementById('kanji');
+
+        if (kanjiSection.style.display === 'none') {
+            kanjiSection.style.display = 'block';
+            kanjiSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            kanjiSection.style.display = 'none';
+        }
+    });
+</script>
 
 </body>
 </html>
