@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verbes japonais Quiz</title>
+
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/quizz-verbes.css">
+
+    <script src="../util/wanakana.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="main-header">
+
+        <div class="logo">
+            <h1>動詞 Quiz</h1>
+        </div>
+
+        <p class="tagline">
+            Apprends tes verbes japonais en t'amusant 🇯🇵
+        </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         LOADING
+    ====================================================== -->
+
+    <div id="loading" class="panel">
+
+        <span class="loading-icon">⛩️</span>
+
+        Chargement des verbes...
+
+    </div>
+
+
+    <!-- =====================================================
+         ERROR
+    ====================================================== -->
+
+    <div id="errorMessage" class="hidden"></div>
+
+
+    <!-- =====================================================
+         CONFIGURATION
+    ====================================================== -->
+
+    <section id="configScreen" class="hidden">
+
+        <h2 class="section-title">
+            Configure ton quiz
+        </h2>
+
+        <p class="section-description">
+            Choisis le type de question et les verbes à réviser.
+        </p>
+
+
+        <!-- =================================================
+             INFORMATIONS
+        ================================================== -->
+
+        <div class="level-info">
+
+            <h3>
+                Verbes disponibles :
+                <span id="verbCount"></span>
+            </h3>
+
+        </div>
+
+
+        <!-- =================================================
+             MODES
+        ================================================== -->
+
+        <div class="mode-container">
+
+            <!-- Traduction → Kana -->
+
+            <label class="mode-option selected">
+
+                <input
+                    type="radio"
+                    name="quizMode"
+                    value="translation_to_kana"
+                    checked
+                >
+
+                <span class="mode-icon">
+                    🇯🇵
+                </span>
+
+                <div class="mode-title">
+                    Traduction → Kana
+                </div>
+
+                <div class="mode-description">
+                    Trouver la forme en japonais
+                </div>
+
+            </label>
+
+
+            <!-- Kana → Traduction -->
+
+            <label class="mode-option">
+
+                <input
+                    type="radio"
+                    name="quizMode"
+                    value="kana_to_translation"
+                >
+
+                <span class="mode-icon">
+                    あ
+                </span>
+
+                <div class="mode-title">
+                    Kana → Traduction
+                </div>
+
+                <div class="mode-description">
+                    Trouver la traduction
+                </div>
+
+            </label>
+
+
+            <!-- Kanji → Traduction -->
+
+            <label class="mode-option">
+
+                <input
+                    type="radio"
+                    name="quizMode"
+                    value="kanji_to_translation"
+                >
+
+                <span class="mode-icon">
+                    漢
+                </span>
+
+                <div class="mode-title">
+                    Kanji → Traduction
+                </div>
+
+                <div class="mode-description">
+                    Trouver la signification
+                </div>
+
+            </label>
+
+
+            <!-- Kanji → ます -->
+
+            <label class="mode-option">
+
+                <input
+                    type="radio"
+                    name="quizMode"
+                    value="kanji_to_masu"
+                >
+
+                <span class="mode-icon">
+                    ます
+                </span>
+
+                <div class="mode-title">
+                    Kanji → ます
+                </div>
+
+                <div class="mode-description">
+                    Trouver la forme polie
+                </div>
+
+            </label>
+
+
+            <!-- Kanji → ない -->
+
+            <label class="mode-option">
+
+                <input
+                    type="radio"
+                    name="quizMode"
+                    value="kanji_to_nai"
+                >
+
+                <span class="mode-icon">
+                    ない
+                </span>
+
+                <div class="mode-title">
+                    Kanji → ない
+                </div>
+
+                <div class="mode-description">
+                    Trouver la forme négative
+                </div>
+
+            </label>
+
+
+            <!-- Kanji → て -->
+
+            <label class="mode-option">
+
+                <input
+                    type="radio"
+                    name="quizMode"
+                    value="kanji_to_te"
+                >
+
+                <span class="mode-icon">
+                    て
+                </span>
+
+                <div class="mode-title">
+                    Kanji → て
+                </div>
+
+                <div class="mode-description">
+                    Trouver la forme en て
+                </div>
+
+            </label>
+
+        </div>
+
+
+        <!-- =================================================
+             SELECTION DES VERBES
+        ================================================== -->
+
+        <div class="selection-section">
+
+            <div class="selection-header">
+
+                <h3 class="selection-title">
+
+                    Choisis tes verbes
+
+                    <span
+                        id="selectedCount"
+                        class="selected-count"
+                    >
+                        0 sélectionné
+                    </span>
+
+                </h3>
+
+
+                <button
+                    id="selectAllBtn"
+                    class="btn btn-secondary"
+                    type="button"
+                >
+
+                    <span class="btn-icon">
+                        ✓
+                    </span>
+
+                    Tout désélectionner
+
+                </button>
+
+            </div>
+
+
+            <!-- Liste des verbes -->
+
+            <div
+                id="verbeList"
+                class="verbe-list"
+            ></div>
+
+        </div>
+
+
+        <!-- =================================================
+             START
+        ================================================== -->
+
+        <div class="action-buttons">
+
+            <button
+                id="startQuizBtn"
+                class="btn btn-primary"
+                type="button"
+            >
+
+                <span class="btn-icon">
+                    🎌
+                </span>
+
+                Commencer le quiz
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         QUIZ
+    ====================================================== -->
+
+    <section id="quizScreen" class="hidden">
+
+        <!-- HEADER QUIZ -->
+
+        <div class="quiz-header">
+
+            <div class="progress-container">
+
+                <div
+                    id="progress"
+                    class="progress-text"
+                >
+                    Question 1 / 10
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="progressFill"
+                        class="progress-fill"
+                        style="width: 0%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="score"
+                class="score"
+            >
+                Score : 0
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION -->
+
+        <div class="question">
+
+            <div
+                id="questionLabel"
+                class="question-label"
+            >
+                Quel est ce verbe ?
+            </div>
+
+
+            <!-- Verbe affiché -->
+
+            <div class="question-verb">
+
+                <div
+                    id="questionKanji"
+                    class="question-kanji"
+                >
+                    会う
+                </div>
+
+
+                <div
+                    id="questionKana"
+                    class="question-kana"
+                >
+                    あう
+                </div>
+
+            </div>
+
+
+            <!-- Question -->
+
+            <div
+                id="questionText"
+                class="question-text"
+            >
+                Quelle est sa traduction ?
+            </div>
+
+
+            <!-- Indice -->
+
+            <div
+                id="questionHint"
+                class="question-hint hidden"
+            ></div>
+
+
+            <!-- Réponse -->
+
+            <input
+                id="answerInput"
+                class="answer-input"
+                type="text"
+                autocomplete="off"
+                placeholder="Écris ta réponse..."
+            >
+
+
+            <!-- Boutons -->
+
+            <div class="quiz-actions">
+
+                <button
+                    id="submitAnswerBtn"
+                    class="btn btn-primary"
+                    type="button"
+                >
+                    ✓ Valider
+                </button>
+
+
+                <button
+                    id="nextQuestionBtn"
+                    class="btn btn-green hidden"
+                    type="button"
+                >
+                    Question suivante →
+                </button>
+
+            </div>
+
+
+            <!-- Résultat -->
+
+            <div
+                id="result"
+                class="result hidden"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL
+    ====================================================== -->
+
+    <section id="finalScreen" class="hidden">
+
+        <div class="final-score">
+
+            <div class="final-icon">
+                🎉
+            </div>
+
+            <h2>
+                Quiz terminé !
+            </h2>
+
+            <div
+                id="finalScoreNumber"
+                class="final-score-number"
+            >
+                0 / 0
+            </div>
+
+            <div
+                id="finalMessage"
+                class="final-message"
+            >
+                Bravo !
+            </div>
+
+            <button
+                id="restartBtn"
+                class="btn btn-primary"
+                type="button"
+            >
+                ↻ Recommencer
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <nav class="nav-buttons">
+
+        <a
+            href="../index.html"
+            class="btn-back btn-home btn-nav"
+        >
+            🏠 Page d'accueil
+        </a>
+
+
+        <a
+            href="../learn/menu.html"
+            class="btn-back btn-learn btn-nav"
+        >
+            📚 Apprendre
+        </a>
+
+
+        <a
+            href="menu.html"
+            class="btn-back btn-learn btn-nav"
+        >
+            📚 Faire un quiz
+        </a>
+
+    </nav>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="simple-footer">
+
+        Verbes japonais Quiz · 日本語を勉強しましょう 🇯🇵
+
+    </footer>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+const DATA_BASE_URL = "../data/";
+const DATA_FILE = "verbes.json";
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let VERB_DATA = [];
+
+let selectedVerbs = [];
+
+let quizQuestions = [];
+
+let currentQuestionIndex = 0;
+
+let score = 0;
+
+let answerValidated = false;
+
+let currentMode = "translation_to_kana";
+
+
+/* =========================================================
+   ELEMENTS HTML
+========================================================= */
+
+const loading =
+    document.getElementById("loading");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+const configScreen =
+    document.getElementById("configScreen");
+
+const quizScreen =
+    document.getElementById("quizScreen");
+
+const finalScreen =
+    document.getElementById("finalScreen");
+
+const verbeList =
+    document.getElementById("verbeList");
+
+const verbCount =
+    document.getElementById("verbCount");
+
+const selectedCount =
+    document.getElementById("selectedCount");
+
+const selectAllBtn =
+    document.getElementById("selectAllBtn");
+
+const startQuizBtn =
+    document.getElementById("startQuizBtn");
+
+const questionLabel =
+    document.getElementById("questionLabel");
+
+const questionKanji =
+    document.getElementById("questionKanji");
+
+const questionKana =
+    document.getElementById("questionKana");
+
+const questionText =
+    document.getElementById("questionText");
+
+const questionHint =
+    document.getElementById("questionHint");
+
+const answerInput =
+    document.getElementById("answerInput");
+
+const submitAnswerBtn =
+    document.getElementById("submitAnswerBtn");
+
+const nextQuestionBtn =
+    document.getElementById("nextQuestionBtn");
+
+const result =
+    document.getElementById("result");
+
+const progress =
+    document.getElementById("progress");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+const scoreElement =
+    document.getElementById("score");
+
+const finalScoreNumber =
+    document.getElementById("finalScoreNumber");
+
+const finalMessage =
+    document.getElementById("finalMessage");
+
+const restartBtn =
+    document.getElementById("restartBtn");
+
+
+/* =========================================================
+   CHARGEMENT DES DONNEES
+========================================================= */
+
+async function loadVerbData() {
+
+    try {
+
+        loading.classList.remove("hidden");
+
+        const response =
+            await fetch(DATA_BASE_URL + DATA_FILE);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Erreur HTTP ${response.status}`
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (!Array.isArray(data)) {
+
+            throw new Error(
+                "Le fichier JSON doit contenir un tableau."
+            );
+
+        }
+
+
+        VERB_DATA = data;
+
+
+        verbCount.textContent =
+            data.length.toLocaleString("fr-FR");
+
+
+        renderVerbList();
+
+        updateSelectAllButton();
+
+        updateSelectedCount();
+
+
+        loading.classList.add("hidden");
+
+        configScreen.classList.remove("hidden");
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        loading.classList.add("hidden");
+
+        errorMessage.classList.remove("hidden");
+
+
+        errorMessage.innerHTML = `
+
+            <strong>
+                ❌ Impossible de charger les verbes
+            </strong>
+
+            <br><br>
+
+            ${escapeHtml(error.message)}
+
+            <br><br>
+
+            Fichier recherché :
+
+            <br>
+
+            <code>
+                ${escapeHtml(
+                    DATA_BASE_URL + DATA_FILE
+                )}
+            </code>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   AFFICHER LA LISTE DES VERBES
+========================================================= */
+
+function renderVerbList() {
+
+    verbeList.innerHTML = "";
+
+
+    VERB_DATA.forEach((verb, index) => {
+
+        const row =
+            document.createElement("label");
+
+
+        row.className = "verbe-row";
+
+
+        row.innerHTML = `
+
+            <input
+                type="checkbox"
+                class="verbe-checkbox"
+                data-index="${index}"
+                checked
+            >
+
+
+            <div class="verbe-main">
+
+                <div class="verbe-kanji">
+                    ${escapeHtml(
+                        verb["Kanji"] || "-"
+                    )}
+                </div>
+
+                <div class="verbe-kana">
+                    ${escapeHtml(
+                        verb["Kana"] || "-"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="verbe-info">
+
+                <div class="verbe-traduction">
+
+                    ${escapeHtml(
+                        verb["Traduction"] || "-"
+                    )}
+
+                </div>
+
+
+                <div class="verbe-forms">
+
+                    <span class="verbe-form">
+
+                        <span class="verbe-form-label">
+                            ます :
+                        </span>
+
+                        <span class="verbe-form-value">
+
+                            ${escapeHtml(
+                                verb["Forme ます"] || "-"
+                            )}
+
+                        </span>
+
+                    </span>
+
+
+                    <span class="verbe-form">
+
+                        <span class="verbe-form-label">
+                            ない :
+                        </span>
+
+                        <span class="verbe-form-value">
+
+                            ${escapeHtml(
+                                verb["Forme ない"] || "-"
+                            )}
+
+                        </span>
+
+                    </span>
+
+
+                    <span class="verbe-form">
+
+                        <span class="verbe-form-label">
+                            て :
+                        </span>
+
+                        <span class="verbe-form-value">
+
+                            ${escapeHtml(
+                                verb["Forme て"] || "-"
+                            )}
+
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        verbeList.appendChild(row);
+
+    });
+
+
+    document
+        .querySelectorAll(".verbe-checkbox")
+        .forEach(checkbox => {
+
+            checkbox.addEventListener(
+                "change",
+                () => {
+
+                    updateSelectAllButton();
+
+                    updateSelectedCount();
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+selectAllBtn.addEventListener(
+    "click",
+    () => {
+
+        const checkboxes =
+            Array.from(
+                document.querySelectorAll(
+                    ".verbe-checkbox"
+                )
+            );
+
+
+        if (checkboxes.length === 0) {
+            return;
+        }
+
+
+        const allSelected =
+            checkboxes.every(
+                checkbox => checkbox.checked
+            );
+
+
+        checkboxes.forEach(
+            checkbox => {
+
+                checkbox.checked =
+                    !allSelected;
+
+            }
+        );
+
+
+        updateSelectAllButton();
+
+        updateSelectedCount();
+
+    }
+);
+
+
+function updateSelectAllButton() {
+
+    const checkboxes =
+        Array.from(
+            document.querySelectorAll(
+                ".verbe-checkbox"
+            )
+        );
+
+
+    if (checkboxes.length === 0) {
+        return;
+    }
+
+
+    const allSelected =
+        checkboxes.every(
+            checkbox => checkbox.checked
+        );
+
+
+    selectAllBtn.innerHTML = `
+
+        <span class="btn-icon">
+            ${allSelected ? "✓" : "☐"}
+        </span>
+
+        ${allSelected
+            ? "Tout désélectionner"
+            : "Tout sélectionner"
+        }
+
+    `;
+
+}
+
+
+function updateSelectedCount() {
+
+    const checkboxes =
+        Array.from(
+            document.querySelectorAll(
+                ".verbe-checkbox"
+            )
+        );
+
+
+    const count =
+        checkboxes.filter(
+            checkbox => checkbox.checked
+        ).length;
+
+
+    selectedCount.textContent =
+
+        `${count} sélectionné${
+            count > 1 ? "s" : ""
+        }`;
+
+}
+
+
+function getSelectedVerbs() {
+
+    const checkboxes =
+        Array.from(
+            document.querySelectorAll(
+                ".verbe-checkbox"
+            )
+        );
+
+
+    return checkboxes
+
+        .filter(
+            checkbox => checkbox.checked
+        )
+
+        .map(
+            checkbox =>
+                VERB_DATA[
+                    Number(checkbox.dataset.index)
+                ]
+        );
+
+}
+
+
+/* =========================================================
+   MODES
+========================================================= */
+
+function setupModeSelection() {
+
+    const modeInputs =
+        document.querySelectorAll(
+            'input[name="quizMode"]'
+        );
+
+
+    modeInputs.forEach(input => {
+
+        input.addEventListener(
+            "change",
+            () => {
+
+                currentMode =
+                    input.value;
+
+
+                const modeOptions =
+                    document.querySelectorAll(
+                        ".mode-option"
+                    );
+
+
+                modeOptions.forEach(option => {
+
+                    const radio =
+                        option.querySelector(
+                            'input[name="quizMode"]'
+                        );
+
+
+                    option.classList.toggle(
+                        "selected",
+                        radio.checked
+                    );
+
+                });
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   DEMARRER LE QUIZ
+========================================================= */
+
+startQuizBtn.addEventListener(
+    "click",
+    startQuiz
+);
+
+
+function startQuiz() {
+
+    selectedVerbs =
+        getSelectedVerbs();
+
+
+    if (selectedVerbs.length === 0) {
+
+        alert(
+            "Sélectionne au moins un verbe."
+        );
+
+        return;
+
+    }
+
+
+    const usableVerbs =
+        selectedVerbs.filter(
+            verb =>
+                getAnswersForVerb(verb).length > 0
+        );
+
+
+    if (usableVerbs.length === 0) {
+
+        alert(
+            "Aucun verbe sélectionné ne possède de données pour ce mode."
+        );
+
+        return;
+
+    }
+
+
+    quizQuestions =
+        shuffle([...usableVerbs]);
+
+
+    currentQuestionIndex = 0;
+
+    score = 0;
+
+
+    configScreen.classList.add("hidden");
+
+    finalScreen.classList.add("hidden");
+
+    quizScreen.classList.remove("hidden");
+
+
+    showQuestion();
+
+}
+
+
+/* =========================================================
+   REPONSES POSSIBLES
+========================================================= */
+
+function getAnswersForVerb(verb) {
+
+    switch (currentMode) {
+
+
+        /* =============================================
+           TRADUCTION → KANA
+        ============================================= */
+
+        case "translation_to_kana":
+
+            return [
+                verb["Kana"]
+            ]
+                .filter(Boolean)
+                .map(value =>
+                    String(value)
+                );
+
+
+        /* =============================================
+           KANA → TRADUCTION
+        ============================================= */
+
+        case "kana_to_translation":
+
+            return [
+                verb["Traduction"]
+            ]
+                .filter(Boolean)
+                .map(value =>
+                    String(value)
+                );
+
+
+        /* =============================================
+           KANJI → TRADUCTION
+        ============================================= */
+
+        case "kanji_to_translation":
+
+            return [
+                verb["Traduction"]
+            ]
+                .filter(Boolean)
+                .map(value =>
+                    String(value)
+                );
+
+
+        /* =============================================
+           KANJI → FORME ます
+        ============================================= */
+
+        case "kanji_to_masu":
+
+            return [
+                verb["Forme ます"]
+            ]
+                .filter(Boolean)
+                .map(value =>
+                    String(value)
+                );
+
+
+        /* =============================================
+           KANJI → FORME ない
+        ============================================= */
+
+        case "kanji_to_nai":
+
+            return [
+                verb["Forme ない"]
+            ]
+                .filter(Boolean)
+                .map(value =>
+                    String(value)
+                );
+
+
+        /* =============================================
+           KANJI → FORME て
+        ============================================= */
+
+        case "kanji_to_te":
+
+            return [
+                verb["Forme て"]
+            ]
+                .filter(Boolean)
+                .map(value =>
+                    String(value)
+                );
+
+
+        default:
+
+            return [];
+
+    }
+
+}
+
+
+/* =========================================================
+   TEXTE DE LA QUESTION
+========================================================= */
+
+function getQuestionText() {
+
+    switch (currentMode) {
+
+        case "translation_to_kana":
+
+            return "Comment dit-on ce verbe en japonais ?";
+
+
+        case "kana_to_translation":
+
+            return "Quelle est la traduction de ce verbe ?";
+
+
+        case "kanji_to_translation":
+
+            return "Quelle est la traduction de ce verbe ?";
+
+
+        case "kanji_to_masu":
+
+            return "Quelle est sa forme en ます ?";
+
+
+        case "kanji_to_nai":
+
+            return "Quelle est sa forme en ない ?";
+
+
+        case "kanji_to_te":
+
+            return "Quelle est sa forme en て ?";
+
+
+        default:
+
+            return "Quelle est la réponse ?";
+
+    }
+
+}
+
+
+/* =========================================================
+   AFFICHAGE DE LA QUESTION
+========================================================= */
+
+function showQuestion() {
+
+    const question =
+        quizQuestions[
+            currentQuestionIndex
+        ];
+
+
+    answerValidated = false;
+
+
+    /*
+     * Affichage du Kanji
+     */
+
+    questionKanji.textContent =
+        question["Kanji"] || "";
+
+
+    /*
+     * Affichage du Kana
+     */
+
+    questionKana.textContent =
+        question["Kana"] || "";
+
+
+    /*
+     * Texte de la question
+     */
+
+    questionText.textContent =
+        getQuestionText();
+
+
+    /*
+     * Selon le mode, on cache certaines informations.
+     */
+
+    switch (currentMode) {
+
+
+        case "translation_to_kana":
+
+            questionLabel.textContent =
+                "Traduction";
+
+
+            questionKanji.textContent =
+                question["Traduction"] || "";
+
+
+            questionKana.textContent =
+                "";
+
+
+            break;
+
+
+        case "kana_to_translation":
+
+            questionLabel.textContent =
+                "Quel est ce verbe ?";
+
+
+            questionKanji.textContent =
+                question["Kana"] || "";
+
+
+            questionKana.textContent =
+                "";
+
+
+            break;
+
+
+        case "kanji_to_translation":
+
+            questionLabel.textContent =
+                "Quel est ce verbe ?";
+
+
+            questionKanji.textContent =
+                question["Kanji"] || "";
+
+
+            questionKana.textContent =
+                question["Kana"] || "";
+
+
+            break;
+
+
+        case "kanji_to_masu":
+
+            questionLabel.textContent =
+                "Transformation du verbe";
+
+
+            questionKanji.textContent =
+                question["Kanji"] || "";
+
+
+            questionKana.textContent =
+                question["Kana"] || "";
+
+
+            break;
+
+
+        case "kanji_to_nai":
+
+            questionLabel.textContent =
+                "Transformation du verbe";
+
+
+            questionKanji.textContent =
+                question["Kanji"] || "";
+
+
+            questionKana.textContent =
+                question["Kana"] || "";
+
+
+            break;
+
+
+        case "kanji_to_te":
+
+            questionLabel.textContent =
+                "Transformation du verbe";
+
+
+            questionKanji.textContent =
+                question["Kanji"] || "";
+
+
+            questionKana.textContent =
+                question["Kana"] || "";
+
+
+            break;
+
+    }
+
+
+    /*
+     * Progression
+     */
+
+    const current =
+        currentQuestionIndex + 1;
+
+
+    const total =
+        quizQuestions.length;
+
+
+    progress.textContent =
+        `Question ${current} / ${total}`;
+
+
+    progressFill.style.width =
+        `${(current / total) * 100}%`;
+
+
+    /*
+     * Score
+     */
+
+    scoreElement.textContent =
+        `Score : ${score}`;
+
+
+    /*
+     * Champ de réponse
+     */
+
+    answerInput.value = "";
+
+    answerInput.disabled = false;
+
+
+    /*
+     * Résultat
+     */
+
+    result.className =
+        "result hidden";
+
+    result.innerHTML = "";
+
+
+    /*
+     * Boutons
+     */
+
+    submitAnswerBtn.classList.remove(
+        "hidden"
+    );
+
+    nextQuestionBtn.classList.add(
+        "hidden"
+    );
+
+
+    /*
+     * Focus automatique
+     */
+
+    setTimeout(
+        () => answerInput.focus(),
+        50
+    );
+
+}
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+submitAnswerBtn.addEventListener(
+    "click",
+    validateAnswer
+);
+
+
+answerInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key !== "Enter") {
+            return;
+        }
+
+
+        if (!answerValidated) {
+
+            validateAnswer();
+
+        } else {
+
+            nextQuestion();
+
+        }
+
+    }
+);
+
+
+function validateAnswer() {
+
+    if (answerValidated) {
+        return;
+    }
+
+
+    const userAnswer =
+        normalizeAnswer(
+            answerInput.value
+        );
+
+
+    const question =
+        quizQuestions[
+            currentQuestionIndex
+        ];
+
+
+    const correctAnswers =
+        getAnswersForVerb(question);
+
+
+    /*
+     * Pas de réponse
+     */
+
+    if (!userAnswer) {
+
+        answerValidated = true;
+
+        answerInput.disabled = true;
+
+
+        submitAnswerBtn.classList.add(
+            "hidden"
+        );
+
+
+        nextQuestionBtn.classList.remove(
+            "hidden"
+        );
+
+
+        result.className =
+            "result incorrect";
+
+
+        result.innerHTML = `
+
+            <div class="result-title">
+                ⏭️ Pas de réponse
+            </div>
+
+            <div>
+                La réponse attendue était :
+            </div>
+
+            <div class="correct-answer">
+
+                ${correctAnswers
+                    .map(escapeHtml)
+                    .join(" / ")
+                }
+
+            </div>
+
+            ${getVerbDetailsHtml(question)}
+
+        `;
+
+
+        return;
+
+    }
+
+
+    /*
+     * Vérification
+     */
+
+    const normalizedCorrectAnswers =
+        correctAnswers.map(
+            normalizeAnswer
+        );
+
+
+    const isCorrect =
+        normalizedCorrectAnswers.includes(
+            userAnswer
+        );
+
+
+    answerValidated = true;
+
+    answerInput.disabled = true;
+
+
+    submitAnswerBtn.classList.add(
+        "hidden"
+    );
+
+
+    nextQuestionBtn.classList.remove(
+        "hidden"
+    );
+
+
+    /*
+     * Bonne réponse
+     */
+
+    if (isCorrect) {
+
+        score++;
+
+
+        result.className =
+            "result correct";
+
+
+        result.innerHTML = `
+
+            <div class="result-title">
+                ✓ Correct !
+            </div>
+
+            <div>
+                Bonne réponse :
+            </div>
+
+            <div class="correct-answer">
+
+                ${correctAnswers
+                    .map(escapeHtml)
+                    .join(" / ")
+                }
+
+            </div>
+
+            ${getVerbDetailsHtml(question)}
+
+        `;
+
+    }
+
+
+    /*
+     * Mauvaise réponse
+     */
+
+    else {
+
+        result.className =
+            "result incorrect";
+
+
+        result.innerHTML = `
+
+            <div class="result-title">
+                ✗ Incorrect
+            </div>
+
+            <div>
+                La réponse attendue était :
+            </div>
+
+            <div class="correct-answer">
+
+                ${correctAnswers
+                    .map(escapeHtml)
+                    .join(" / ")
+                }
+
+            </div>
+
+            ${getVerbDetailsHtml(question)}
+
+        `;
+
+    }
+
+
+    scoreElement.textContent =
+        `Score : ${score}`;
+
+}
+
+
+/* =========================================================
+   DETAILS DU VERBE
+========================================================= */
+
+function getVerbDetailsHtml(verb) {
+
+    return `
+
+        <div class="verb-details">
+
+            <div class="verb-details-title">
+                📖 Détails du verbe
+            </div>
+
+
+            <div class="verb-detail-grid">
+
+
+                <div class="verb-detail">
+
+                    <span class="verb-detail-label">
+                        Kanji
+                    </span>
+
+                    <span class="verb-detail-value">
+                        ${escapeHtml(
+                            verb["Kanji"] || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="verb-detail">
+
+                    <span class="verb-detail-label">
+                        Kana
+                    </span>
+
+                    <span class="verb-detail-value">
+                        ${escapeHtml(
+                            verb["Kana"] || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="verb-detail">
+
+                    <span class="verb-detail-label">
+                        Traduction
+                    </span>
+
+                    <span class="verb-detail-value">
+                        ${escapeHtml(
+                            verb["Traduction"] || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="verb-detail">
+
+                    <span class="verb-detail-label">
+                        Forme ます
+                    </span>
+
+                    <span class="verb-detail-value">
+                        ${escapeHtml(
+                            verb["Forme ます"] || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="verb-detail">
+
+                    <span class="verb-detail-label">
+                        Forme ない
+                    </span>
+
+                    <span class="verb-detail-value">
+                        ${escapeHtml(
+                            verb["Forme ない"] || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="verb-detail">
+
+                    <span class="verb-detail-label">
+                        Forme て
+                    </span>
+
+                    <span class="verb-detail-value">
+                        ${escapeHtml(
+                            verb["Forme て"] || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   QUESTION SUIVANTE
+========================================================= */
+
+nextQuestionBtn.addEventListener(
+    "click",
+    nextQuestion
+);
+
+
+function nextQuestion() {
+
+    currentQuestionIndex++;
+
+
+    if (
+        currentQuestionIndex >=
+        quizQuestions.length
+    ) {
+
+        showFinalScreen();
+
+        return;
+
+    }
+
+
+    showQuestion();
+
+}
+
+
+/* =========================================================
+   ECRAN FINAL
+========================================================= */
+
+function showFinalScreen() {
+
+    quizScreen.classList.add(
+        "hidden"
+    );
+
+
+    finalScreen.classList.remove(
+        "hidden"
+    );
+
+
+    const total =
+        quizQuestions.length;
+
+
+    finalScoreNumber.textContent =
+        `${score} / ${total}`;
+
+
+    const percentage =
+        Math.round(
+            (score / total) * 100
+        );
+
+
+    if (percentage === 100) {
+
+        finalMessage.textContent =
+            "🎉 Parfait ! Toutes les réponses sont correctes.";
+
+    }
+
+    else if (percentage >= 80) {
+
+        finalMessage.textContent =
+            "👏 Excellent travail !";
+
+    }
+
+    else if (percentage >= 60) {
+
+        finalMessage.textContent =
+            "👍 Très bien ! Continue comme ça.";
+
+    }
+
+    else if (percentage >= 40) {
+
+        finalMessage.textContent =
+            "💪 Pas mal ! Encore un peu d'entraînement.";
+
+    }
+
+    else {
+
+        finalMessage.textContent =
+            "📚 Continue à t'entraîner, tu vas progresser !";
+
+    }
+
+}
+
+
+/* =========================================================
+   RECOMMENCER
+========================================================= */
+
+restartBtn.addEventListener(
+    "click",
+    () => {
+
+        finalScreen.classList.add(
+            "hidden"
+        );
+
+
+        configScreen.classList.remove(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   UTILITAIRES
+========================================================= */
+
+
+/*
+ * Mélange un tableau.
+ */
+
+function shuffle(array) {
+
+    const result =
+        [...array];
+
+
+    for (
+        let i = result.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+
+        [
+            result[i],
+            result[j]
+        ] = [
+            result[j],
+            result[i]
+        ];
+
+    }
+
+
+    return result;
+
+}
+
+
+/*
+ * Normalisation des réponses.
+ *
+ * Permet notamment :
+ *
+ * あいます
+ * あいます
+ *
+ * d'être comparés correctement.
+ */
+
+function normalizeAnswer(value) {
+
+    if (value === null || value === undefined) {
+        return "";
+    }
+
+
+    return String(value)
+
+        .trim()
+
+        .toLowerCase()
+
+        .replace(/\s+/g, " ");
+
+}
+
+
+/*
+ * Protection contre l'injection HTML.
+ */
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+setupModeSelection();
+
+loadVerbData();
+
+</script>
+
+</body>
+
+</html>

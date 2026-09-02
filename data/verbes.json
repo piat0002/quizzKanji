@@ -1,0 +1,1202 @@
+[
+  {
+    "Kanji": "会う",
+    "Kana": "あう",
+    "Forme ます": "あいます",
+    "Forme ない": "あわない",
+    "Forme て": "あって",
+    "Traduction": "Rencontrer"
+  },
+  {
+    "Kanji": "開く",
+    "Kana": "あく",
+    "Forme ます": "あきます",
+    "Forme ない": "あかない",
+    "Forme て": "あいて",
+    "Traduction": "S’ouvrir"
+  },
+  {
+    "Kanji": "開ける",
+    "Kana": "あける",
+    "Forme ます": "あけます",
+    "Forme ない": "あけない",
+    "Forme て": "あけて",
+    "Traduction": "Ouvrir"
+  },
+  {
+    "Kanji": "",
+    "Kana": "あげる",
+    "Forme ます": "あげます",
+    "Forme ない": "あげない",
+    "Forme て": "あげて",
+    "Traduction": "Donner"
+  },
+  {
+    "Kanji": "遊ぶ",
+    "Kana": "あそぶ",
+    "Forme ます": "あそびます",
+    "Forme ない": "あそばない",
+    "Forme て": "あそんで",
+    "Traduction": "S’amuser"
+  },
+  {
+    "Kanji": "集める",
+    "Kana": "あつめる",
+    "Forme ます": "あつめます",
+    "Forme ない": "あつめない",
+    "Forme て": "あつめて",
+    "Traduction": "Collectionner, rassembler"
+  },
+  {
+    "Kanji": "浴びる",
+    "Kana": "あびる",
+    "Forme ます": "あびます",
+    "Forme ない": "あびない",
+    "Forme て": "あびて",
+    "Traduction": "Prendre (une douche)"
+  },
+  {
+    "Kanji": "洗う",
+    "Kana": "あらう",
+    "Forme ます": "あらいます",
+    "Forme ない": "あらわない",
+    "Forme て": "あらって",
+    "Traduction": "Laver"
+  },
+  {
+    "Kanji": "",
+    "Kana": "ある",
+    "Forme ます": "あります",
+    "Forme ない": "ない",
+    "Forme て": "あって",
+    "Traduction": "Avoir"
+  },
+  {
+    "Kanji": "歩く",
+    "Kana": "あるく",
+    "Forme ます": "あるきます",
+    "Forme ない": "あるかない",
+    "Forme て": "あるいて",
+    "Traduction": "Marcher"
+  },
+  {
+    "Kanji": "言う",
+    "Kana": "いう",
+    "Forme ます": "いいます",
+    "Forme ない": "いわない",
+    "Forme て": "いって",
+    "Traduction": "Dire"
+  },
+  {
+    "Kanji": "行く",
+    "Kana": "いく",
+    "Forme ます": "いきます",
+    "Forme ない": "いかない",
+    "Forme て": "いって",
+    "Traduction": "Aller"
+  },
+  {
+    "Kanji": "急ぐ",
+    "Kana": "いそぐ",
+    "Forme ます": "いそぎます",
+    "Forme ない": "いそがない",
+    "Forme て": "いそいで",
+    "Traduction": "Se dépêcher"
+  },
+  {
+    "Kanji": "頂く",
+    "Kana": "いただく",
+    "Forme ます": "いただきます",
+    "Forme ない": "いただかない",
+    "Forme て": "いただいて",
+    "Traduction": "Manger, boire, recevoir (poli)"
+  },
+  {
+    "Kanji": "",
+    "Kana": "いる",
+    "Forme ます": "います",
+    "Forme ない": "いない",
+    "Forme て": "いて",
+    "Traduction": "Avoir, être"
+  },
+  {
+    "Kanji": "要る",
+    "Kana": "いる",
+    "Forme ます": "いります",
+    "Forme ない": "いらない",
+    "Forme て": "いって",
+    "Traduction": "Avoir besoin de"
+  },
+  {
+    "Kanji": "入れる",
+    "Kana": "いれる",
+    "Forme ます": "いれます",
+    "Forme ない": "いれない",
+    "Forme て": "いれて",
+    "Traduction": "Insérer"
+  },
+  {
+    "Kanji": "歌う",
+    "Kana": "うたう",
+    "Forme ます": "うたいます",
+    "Forme ない": "うたわない",
+    "Forme て": "うたって",
+    "Traduction": "Chanter"
+  },
+  {
+    "Kanji": "生まれる",
+    "Kana": "うまれる",
+    "Forme ます": "うまれます",
+    "Forme ない": "うまれない",
+    "Forme て": "うまれて",
+    "Traduction": "Naître"
+  },
+  {
+    "Kanji": "売る",
+    "Kana": "うる",
+    "Forme ます": "うります",
+    "Forme ない": "うらない",
+    "Forme て": "うって",
+    "Traduction": "Vendre"
+  },
+  {
+    "Kanji": "選ぶ",
+    "Kana": "えらぶ",
+    "Forme ます": "えらびます",
+    "Forme ない": "えらばない",
+    "Forme て": "えらんで",
+    "Traduction": "Choisir"
+  },
+  {
+    "Kanji": "起きる",
+    "Kana": "おきる",
+    "Forme ます": "おきます",
+    "Forme ない": "おきない",
+    "Forme て": "おきて",
+    "Traduction": "Se lever"
+  },
+  {
+    "Kanji": "置く",
+    "Kana": "おく",
+    "Forme ます": "おきます",
+    "Forme ない": "おかない",
+    "Forme て": "おいて",
+    "Traduction": "Poser"
+  },
+  {
+    "Kanji": "送る",
+    "Kana": "おくる",
+    "Forme ます": "おくります",
+    "Forme ない": "おくらない",
+    "Forme て": "おくって",
+    "Traduction": "Envoyer, expédier"
+  },
+  {
+    "Kanji": "遅れる",
+    "Kana": "おくれる",
+    "Forme ます": "おくれます",
+    "Forme ない": "おくれない",
+    "Forme て": "おくれて",
+    "Traduction": "Être en retard"
+  },
+  {
+    "Kanji": "怒る",
+    "Kana": "おこる",
+    "Forme ます": "おこります",
+    "Forme ない": "おこらない",
+    "Forme て": "おこって",
+    "Traduction": "S’énerver"
+  },
+  {
+    "Kanji": "教える",
+    "Kana": "おしえる",
+    "Forme ます": "おしえます",
+    "Forme ない": "おしえない",
+    "Forme て": "おしえて",
+    "Traduction": "Enseigner"
+  },
+  {
+    "Kanji": "押す",
+    "Kana": "おす",
+    "Forme ます": "おします",
+    "Forme ない": "おさない",
+    "Forme て": "おして",
+    "Traduction": "Pousser, presser"
+  },
+  {
+    "Kanji": "覚える",
+    "Kana": "おぼえる",
+    "Forme ます": "おぼえます",
+    "Forme ない": "おぼえない",
+    "Forme て": "おぼえて",
+    "Traduction": "Se rappeler, mémoriser"
+  },
+  {
+    "Kanji": "思う",
+    "Kana": "おもう",
+    "Forme ます": "おもいます",
+    "Forme ない": "おもわない",
+    "Forme て": "おもって",
+    "Traduction": "Penser"
+  },
+  {
+    "Kanji": "泳ぐ",
+    "Kana": "およぐ",
+    "Forme ます": "およぎます",
+    "Forme ない": "およがない",
+    "Forme て": "およいで",
+    "Traduction": "Nager"
+  },
+  {
+    "Kanji": "降りる",
+    "Kana": "おりる",
+    "Forme ます": "おります",
+    "Forme ない": "おりない",
+    "Forme て": "おりて",
+    "Traduction": "Descendre d’un véhicule"
+  },
+  {
+    "Kanji": "終わる",
+    "Kana": "おわる",
+    "Forme ます": "おわります",
+    "Forme ない": "おわらない",
+    "Forme て": "おわって",
+    "Traduction": "Finir, se terminer"
+  },
+  {
+    "Kanji": "買う",
+    "Kana": "かう",
+    "Forme ます": "かいます",
+    "Forme ない": "かわない",
+    "Forme て": "かって",
+    "Traduction": "Acheter"
+  },
+  {
+    "Kanji": "返す",
+    "Kana": "かえす",
+    "Forme ます": "かえします",
+    "Forme ない": "かえさない",
+    "Forme て": "かえして",
+    "Traduction": "Rendre, rembourser"
+  },
+  {
+    "Kanji": "",
+    "Kana": "かえる",
+    "Forme ます": "かえます",
+    "Forme ない": "かえない",
+    "Forme て": "かえた",
+    "Traduction": "Changer, échanger"
+  },
+  {
+    "Kanji": "帰る",
+    "Kana": "かえる",
+    "Forme ます": "かえります",
+    "Forme ない": "かえらない",
+    "Forme て": "かえって",
+    "Traduction": "Rentrer"
+  },
+  {
+    "Kanji": "",
+    "Kana": "かかる",
+    "Forme ます": "かかります",
+    "Forme ない": "かからない",
+    "Forme て": "かかって",
+    "Traduction": "Prendre (du temps)"
+  },
+  {
+    "Kanji": "書く・描く",
+    "Kana": "かく",
+    "Forme ます": "かきます",
+    "Forme ない": "かかない",
+    "Forme て": "かいて",
+    "Traduction": "Écrire, dessiner"
+  },
+  {
+    "Kanji": "",
+    "Kana": "かける",
+    "Forme ます": "かけます",
+    "Forme ない": "かけない",
+    "Forme て": "かけて",
+    "Traduction": "Appeler (au téléphone)"
+  },
+  {
+    "Kanji": "掛ける",
+    "Kana": "かける",
+    "Forme ます": "かけます",
+    "Forme ない": "かけない",
+    "Forme て": "かけて",
+    "Traduction": "Porter (des lunettes)"
+  },
+  {
+    "Kanji": "貸す",
+    "Kana": "かす",
+    "Forme ます": "かします",
+    "Forme ない": "かさない",
+    "Forme て": "かして",
+    "Traduction": "Prêter"
+  },
+  {
+    "Kanji": "勝つ",
+    "Kana": "かつ",
+    "Forme ます": "かちます",
+    "Forme ない": "かたない",
+    "Forme て": "かって",
+    "Traduction": "Gagner"
+  },
+  {
+    "Kanji": "被る",
+    "Kana": "かぶる",
+    "Forme ます": "かぶります",
+    "Forme ない": "かぶらない",
+    "Forme て": "かぶって",
+    "Traduction": "Porter (un chapeau)"
+  },
+  {
+    "Kanji": "借りる",
+    "Kana": "かりる",
+    "Forme ます": "かります",
+    "Forme ない": "かりない",
+    "Forme て": "かりて",
+    "Traduction": "Emprunter"
+  },
+  {
+    "Kanji": "考える",
+    "Kana": "かんがえる",
+    "Forme ます": "かんがえます",
+    "Forme ない": "かんがえない",
+    "Forme て": "かんがえて",
+    "Traduction": "Réfléchir"
+  },
+  {
+    "Kanji": "頑張る",
+    "Kana": "がんばる",
+    "Forme ます": "がんばります",
+    "Forme ない": "がんばらない",
+    "Forme て": "がんばって",
+    "Traduction": "Faire de son mieux"
+  },
+  {
+    "Kanji": "消える",
+    "Kana": "きえる",
+    "Forme ます": "きえます",
+    "Forme ない": "きえない",
+    "Forme て": "きえて",
+    "Traduction": "Disparaître, s’éteindre, s’effacer"
+  },
+  {
+    "Kanji": "聞く",
+    "Kana": "きく",
+    "Forme ます": "ききます",
+    "Forme ない": "きかない",
+    "Forme て": "きいて",
+    "Traduction": "Écouter, demander"
+  },
+  {
+    "Kanji": "休憩する",
+    "Kana": "きゅうけいする",
+    "Forme ます": "きゅうけいします",
+    "Forme ない": "きゅうけいしない",
+    "Forme て": "きゅうけいして",
+    "Traduction": "Faire une pause"
+  },
+  {
+    "Kanji": "着る",
+    "Kana": "きる",
+    "Forme ます": "きます",
+    "Forme ない": "きない",
+    "Forme て": "きて",
+    "Traduction": "Porter (un vêtement)"
+  },
+  {
+    "Kanji": "切る",
+    "Kana": "きる",
+    "Forme ます": "きります",
+    "Forme ない": "きらない",
+    "Forme て": "きって",
+    "Traduction": "Couper"
+  },
+  {
+    "Kanji": "気を付ける",
+    "Kana": "きをつける",
+    "Forme ます": "きをつけます",
+    "Forme ない": "きをつけない",
+    "Forme て": "きをつけて",
+    "Traduction": "Faire attention"
+  },
+  {
+    "Kanji": "来る",
+    "Kana": "くる",
+    "Forme ます": "きます",
+    "Forme ない": "こない",
+    "Forme て": "きて",
+    "Traduction": "Venir"
+  },
+  {
+    "Kanji": "",
+    "Kana": "くれる",
+    "Forme ます": "くれます",
+    "Forme ない": "くれない",
+    "Forme て": "くれて",
+    "Traduction": "Donner (à moi)"
+  },
+  {
+    "Kanji": "消す",
+    "Kana": "けす",
+    "Forme ます": "けします",
+    "Forme ない": "けさない",
+    "Forme て": "けして",
+    "Traduction": "Éteindre"
+  },
+  {
+    "Kanji": "結婚する",
+    "Kana": "けっこんする",
+    "Forme ます": "けっこんします",
+    "Forme ない": "けっこんしない",
+    "Forme て": "けっこんして",
+    "Traduction": "Se marier"
+  },
+  {
+    "Kanji": "見学する",
+    "Kana": "けんがくする",
+    "Forme ます": "けんがくします",
+    "Forme ない": "けんがくしない",
+    "Forme て": "けんがくして",
+    "Traduction": "Faire une visite"
+  },
+  {
+    "Kanji": "答える",
+    "Kana": "こたえる",
+    "Forme ます": "こたえます",
+    "Forme ない": "こたえない",
+    "Forme て": "こたえて",
+    "Traduction": "Répondre"
+  },
+  {
+    "Kanji": "探す",
+    "Kana": "さがす",
+    "Forme ます": "さがします",
+    "Forme ない": "さがさない",
+    "Forme て": "さがして",
+    "Traduction": "Chercher"
+  },
+  {
+    "Kanji": "触る",
+    "Kana": "さわる",
+    "Forme ます": "さわります",
+    "Forme ない": "さわらない",
+    "Forme て": "さわって",
+    "Traduction": "Toucher"
+  },
+  {
+    "Kanji": "散歩する",
+    "Kana": "さんぽする",
+    "Forme ます": "さんぽします",
+    "Forme ない": "さんぽしない",
+    "Forme て": "さんぽして",
+    "Traduction": "Se promener"
+  },
+  {
+    "Kanji": "質問する",
+    "Kana": "しつもんする",
+    "Forme ます": "しつもんします",
+    "Forme ない": "しつもんしない",
+    "Forme て": "しつもんして",
+    "Traduction": "Poser une question"
+  },
+  {
+    "Kanji": "死ぬ",
+    "Kana": "しぬ",
+    "Forme ます": "しにます",
+    "Forme ない": "しなない",
+    "Forme て": "しんで",
+    "Traduction": "Mourir"
+  },
+  {
+    "Kanji": "閉まる",
+    "Kana": "しまる",
+    "Forme ます": "しまります",
+    "Forme ない": "しまらない",
+    "Forme て": "しまって",
+    "Traduction": "Se fermer"
+  },
+  {
+    "Kanji": "閉める",
+    "Kana": "しめる",
+    "Forme ます": "しめます",
+    "Forme ない": "しめない",
+    "Forme て": "しめて",
+    "Traduction": "Fermer"
+  },
+  {
+    "Kanji": "調べる",
+    "Kana": "しらべる",
+    "Forme ます": "しらべます",
+    "Forme ない": "しらべない",
+    "Forme て": "しらべて",
+    "Traduction": "Chercher, examiner"
+  },
+  {
+    "Kanji": "知る",
+    "Kana": "しる",
+    "Forme ます": "しります",
+    "Forme ない": "しらない",
+    "Forme て": "しって",
+    "Traduction": "Connaître, savoir"
+  },
+  {
+    "Kanji": "吸う",
+    "Kana": "すう",
+    "Forme ます": "すいます",
+    "Forme ない": "すわない",
+    "Forme て": "すって",
+    "Traduction": "Fumer, aspirer"
+  },
+  {
+    "Kanji": "捨てる",
+    "Kana": "すてる",
+    "Forme ます": "すてます",
+    "Forme ない": "すてない",
+    "Forme て": "すてて",
+    "Traduction": "Jeter"
+  },
+  {
+    "Kanji": "住む",
+    "Kana": "すむ",
+    "Forme ます": "すみます",
+    "Forme ない": "すまない",
+    "Forme て": "すんで",
+    "Traduction": "Habiter"
+  },
+  {
+    "Kanji": "",
+    "Kana": "する",
+    "Forme ます": "します",
+    "Forme ない": "しない",
+    "Forme て": "して",
+    "Traduction": "Faire"
+  },
+  {
+    "Kanji": "座る",
+    "Kana": "すわる",
+    "Forme ます": "すわります",
+    "Forme ない": "すわらない",
+    "Forme て": "すわって",
+    "Traduction": "S’asseoir"
+  },
+  {
+    "Kanji": "洗濯する",
+    "Kana": "せんたくする",
+    "Forme ます": "せんたくします",
+    "Forme ない": "せんたくしない",
+    "Forme て": "せんたくして",
+    "Traduction": "Faire la lessive"
+  },
+  {
+    "Kanji": "掃除する",
+    "Kana": "そうじする",
+    "Forme ます": "そうじします",
+    "Forme ない": "そうじしない",
+    "Forme て": "そうじして",
+    "Traduction": "Faire le ménage"
+  },
+  {
+    "Kanji": "出す",
+    "Kana": "だす",
+    "Forme ます": "だします",
+    "Forme ない": "ださない",
+    "Forme て": "だして",
+    "Traduction": "Envoyer (une lettre), retirer, sortir"
+  },
+  {
+    "Kanji": "立つ",
+    "Kana": "たつ",
+    "Forme ます": "たちます",
+    "Forme ない": "たたない",
+    "Forme て": "たって",
+    "Traduction": "Se mettre debout"
+  },
+  {
+    "Kanji": "頼む",
+    "Kana": "たのむ",
+    "Forme ます": "たのみます",
+    "Forme ない": "たのまない",
+    "Forme て": "たのんで",
+    "Traduction": "Demander"
+  },
+  {
+    "Kanji": "食べる",
+    "Kana": "たべる",
+    "Forme ます": "たべます",
+    "Forme ない": "たべない",
+    "Forme て": "たべて",
+    "Traduction": "Manger"
+  },
+  {
+    "Kanji": "足りる",
+    "Kana": "たりる",
+    "Forme ます": "たります",
+    "Forme ない": "たりない",
+    "Forme て": "たりて",
+    "Traduction": "Suffire"
+  },
+  {
+    "Kanji": "違う",
+    "Kana": "ちがう",
+    "Forme ます": "ちがいます",
+    "Forme ない": "ちがわない",
+    "Forme て": "ちがって",
+    "Traduction": "Être différent"
+  },
+  {
+    "Kanji": "使う",
+    "Kana": "つかう",
+    "Forme ます": "つかいます",
+    "Forme ない": "つかわない",
+    "Forme て": "つかって",
+    "Traduction": "Utiliser"
+  },
+  {
+    "Kanji": "疲れる",
+    "Kana": "つかれる",
+    "Forme ます": "つかれます",
+    "Forme ない": "つかれない",
+    "Forme て": "つかれて",
+    "Traduction": "Se fatiguer"
+  },
+  {
+    "Kanji": "着く",
+    "Kana": "つく",
+    "Forme ます": "つきます",
+    "Forme ない": "つかない",
+    "Forme て": "ついて",
+    "Traduction": "Arriver"
+  },
+  {
+    "Kanji": "作る",
+    "Kana": "つくる",
+    "Forme ます": "つくります",
+    "Forme ない": "つくらない",
+    "Forme て": "つくって",
+    "Traduction": "Créer, fabriquer"
+  },
+  {
+    "Kanji": "点ける",
+    "Kana": "つける",
+    "Forme ます": "つけます",
+    "Forme ない": "つけない",
+    "Forme て": "つけて",
+    "Traduction": "Allumer"
+  },
+  {
+    "Kanji": "連れて来る",
+    "Kana": "つれてくる",
+    "Forme ます": "つれてきます",
+    "Forme ない": "つれてこない",
+    "Forme て": "つれてきて",
+    "Traduction": "Amener (qqn)"
+  },
+  {
+    "Kanji": "連れて行く",
+    "Kana": "つれていく",
+    "Forme ます": "つれていきます",
+    "Forme ない": "つれていかない",
+    "Forme て": "つれていって",
+    "Traduction": "Emmener (qqn)"
+  },
+  {
+    "Kanji": "出かける",
+    "Kana": "でかける",
+    "Forme ます": "でかけます",
+    "Forme ない": "でかけない",
+    "Forme て": "でかけて",
+    "Traduction": "Sortir"
+  },
+  {
+    "Kanji": "",
+    "Kana": "できる",
+    "Forme ます": "できます",
+    "Forme ない": "できない",
+    "Forme て": "できて",
+    "Traduction": "Pouvoir"
+  },
+  {
+    "Kanji": "手伝う",
+    "Kana": "てつだう",
+    "Forme ます": "てつだいます",
+    "Forme ない": "てつだわない",
+    "Forme て": "てつだって",
+    "Traduction": "Aider"
+  },
+  {
+    "Kanji": "出る",
+    "Kana": "でる",
+    "Forme ます": "でます",
+    "Forme ない": "でない",
+    "Forme て": "でて",
+    "Traduction": "Sortir"
+  },
+  {
+    "Kanji": "飛ぶ",
+    "Kana": "とぶ",
+    "Forme ます": "とびます",
+    "Forme ない": "とばない",
+    "Forme て": "とんで",
+    "Traduction": "Voler, s’envoler, rebondir"
+  },
+  {
+    "Kanji": "止まる",
+    "Kana": "とまる",
+    "Forme ます": "とまります",
+    "Forme ない": "とまらない",
+    "Forme て": "とまって",
+    "Traduction": "S’arrêter"
+  },
+  {
+    "Kanji": "止める",
+    "Kana": "とめる",
+    "Forme ます": "とめます",
+    "Forme ない": "とめない",
+    "Forme て": "とめて",
+    "Traduction": "Arrêter"
+  },
+  {
+    "Kanji": "取る",
+    "Kana": "とる",
+    "Forme ます": "とります",
+    "Forme ない": "とらない",
+    "Forme て": "とって",
+    "Traduction": "Prendre"
+  },
+  {
+    "Kanji": "直す",
+    "Kana": "なおす",
+    "Forme ます": "なおします",
+    "Forme ない": "なおさない",
+    "Forme て": "なおして",
+    "Traduction": "Réparer, corriger"
+  },
+  {
+    "Kanji": "泣く",
+    "Kana": "なく",
+    "Forme ます": "なきます",
+    "Forme ない": "なかない",
+    "Forme て": "ないて",
+    "Traduction": "Pleurer"
+  },
+  {
+    "Kanji": "",
+    "Kana": "なくす",
+    "Forme ます": "なくします",
+    "Forme ない": "なくさない",
+    "Forme て": "なくして",
+    "Traduction": "Perdre"
+  },
+  {
+    "Kanji": "習う",
+    "Kana": "ならう",
+    "Forme ます": "ならいます",
+    "Forme ない": "ならわない",
+    "Forme て": "ならって",
+    "Traduction": "Apprendre"
+  },
+  {
+    "Kanji": "並ぶ",
+    "Kana": "ならぶ",
+    "Forme ます": "ならびます",
+    "Forme ない": "ならばない",
+    "Forme て": "ならんで",
+    "Traduction": "Se mettre en rang, faire la queue"
+  },
+  {
+    "Kanji": "並べる",
+    "Kana": "ならべる",
+    "Forme ます": "ならべます",
+    "Forme ない": "ならべない",
+    "Forme て": "ならべて",
+    "Traduction": "Aligner"
+  },
+  {
+    "Kanji": "",
+    "Kana": "なる",
+    "Forme ます": "なります",
+    "Forme ない": "ならない",
+    "Forme て": "なって",
+    "Traduction": "Devenir"
+  },
+  {
+    "Kanji": "逃げる",
+    "Kana": "にげる",
+    "Forme ます": "にげます",
+    "Forme ない": "にげない",
+    "Forme て": "にげて",
+    "Traduction": "S’échapper, s’enfuir"
+  },
+  {
+    "Kanji": "脱ぐ",
+    "Kana": "ぬぐ",
+    "Forme ます": "ぬぎます",
+    "Forme ない": "ぬがない",
+    "Forme て": "ぬいで",
+    "Traduction": "Se déshabiller"
+  },
+  {
+    "Kanji": "寝る",
+    "Kana": "ねる",
+    "Forme ます": "ねます",
+    "Forme ない": "ねない",
+    "Forme て": "ねて",
+    "Traduction": "Dormir, se coucher"
+  },
+  {
+    "Kanji": "登る",
+    "Kana": "のぼる",
+    "Forme ます": "のぼります",
+    "Forme ない": "のぼらない",
+    "Forme て": "のぼって",
+    "Traduction": "Escalader, grimper"
+  },
+  {
+    "Kanji": "飲む",
+    "Kana": "のむ",
+    "Forme ます": "のみます",
+    "Forme ない": "のまない",
+    "Forme て": "のんで",
+    "Traduction": "Boire"
+  },
+  {
+    "Kanji": "乗り換える",
+    "Kana": "のりかえる",
+    "Forme ます": "のりかえます",
+    "Forme ない": "のりかえない",
+    "Forme て": "のりかえて",
+    "Traduction": "Changer (de véhicule)"
+  },
+  {
+    "Kanji": "乗る",
+    "Kana": "のる",
+    "Forme ます": "のります",
+    "Forme ない": "のらない",
+    "Forme て": "のって",
+    "Traduction": "Monter (dans un véhicule)"
+  },
+  {
+    "Kanji": "入る",
+    "Kana": "はいる",
+    "Forme ます": "はいります",
+    "Forme ない": "はいらない",
+    "Forme て": "はいって",
+    "Traduction": "Entrer, pénétrer"
+  },
+  {
+    "Kanji": "履く",
+    "Kana": "はく",
+    "Forme ます": "はきます",
+    "Forme ない": "はかない",
+    "Forme て": "はいて",
+    "Traduction": "Porter (des chaussures)"
+  },
+  {
+    "Kanji": "始まる",
+    "Kana": "はじまる",
+    "Forme ます": "はじまります",
+    "Forme ない": "はじまらない",
+    "Forme て": "はじまって",
+    "Traduction": "Commencer (intransitif)"
+  },
+  {
+    "Kanji": "始める",
+    "Kana": "はじめる",
+    "Forme ます": "はじめます",
+    "Forme ない": "はじめない",
+    "Forme て": "はじめて",
+    "Traduction": "Commencer (transitif)"
+  },
+  {
+    "Kanji": "走る",
+    "Kana": "はしる",
+    "Forme ます": "はしります",
+    "Forme ない": "はしらない",
+    "Forme て": "はしって",
+    "Traduction": "Courir"
+  },
+  {
+    "Kanji": "働く",
+    "Kana": "はたらく",
+    "Forme ます": "はたらきます",
+    "Forme ない": "はたらかない",
+    "Forme て": "はたらいて",
+    "Traduction": "Travailler"
+  },
+  {
+    "Kanji": "話す",
+    "Kana": "はなす",
+    "Forme ます": "はなします",
+    "Forme ない": "はなさない",
+    "Forme て": "はなして",
+    "Traduction": "Parler"
+  },
+  {
+    "Kanji": "払う",
+    "Kana": "はらう",
+    "Forme ます": "はらいます",
+    "Forme ない": "はらわない",
+    "Forme て": "はらって",
+    "Traduction": "Payer"
+  },
+  {
+    "Kanji": "晴れる",
+    "Kana": "はれる",
+    "Forme ます": "はれます",
+    "Forme ない": "はれない",
+    "Forme て": "はれて",
+    "Traduction": "S’éclaircir, s’ensoleiller"
+  },
+  {
+    "Kanji": "弾く",
+    "Kana": "ひく",
+    "Forme ます": "ひきます",
+    "Forme ない": "ひかない",
+    "Forme て": "ひいて",
+    "Traduction": "Jouer (d’un instrument)"
+  },
+  {
+    "Kanji": "引く",
+    "Kana": "ひく",
+    "Forme ます": "ひきます",
+    "Forme ない": "ひかない",
+    "Forme て": "ひいて",
+    "Traduction": "Tirer"
+  },
+  {
+    "Kanji": "引っ越す",
+    "Kana": "ひっこす",
+    "Forme ます": "ひっこします",
+    "Forme ない": "ひっこさない",
+    "Forme て": "ひっこして",
+    "Traduction": "Déménager"
+  },
+  {
+    "Kanji": "吹く",
+    "Kana": "ふく",
+    "Forme ます": "ふきます",
+    "Forme ない": "ふかない",
+    "Forme て": "ふいて",
+    "Traduction": "Souffler (vent)"
+  },
+  {
+    "Kanji": "降る",
+    "Kana": "ふる",
+    "Forme ます": "ふります",
+    "Forme ない": "ふらない",
+    "Forme て": "ふって",
+    "Traduction": "Tomber, pleuvoir"
+  },
+  {
+    "Kanji": "勉強する",
+    "Kana": "べんきょうする",
+    "Forme ます": "べんきょうします",
+    "Forme ない": "べんきょうしない",
+    "Forme て": "べんきょうして",
+    "Traduction": "Étudier"
+  },
+  {
+    "Kanji": "曲がる",
+    "Kana": "まがる",
+    "Forme ます": "まがります",
+    "Forme ない": "まがらない",
+    "Forme て": "まがって",
+    "Traduction": "Tourner (qq part)"
+  },
+  {
+    "Kanji": "負ける",
+    "Kana": "まける",
+    "Forme ます": "まけます",
+    "Forme ない": "まけない",
+    "Forme て": "まけて",
+    "Traduction": "Perdre, être vaincu"
+  },
+  {
+    "Kanji": "待つ",
+    "Kana": "まつ",
+    "Forme ます": "まちます",
+    "Forme ない": "またない",
+    "Forme て": "まって",
+    "Traduction": "Attendre"
+  },
+  {
+    "Kanji": "回す",
+    "Kana": "まわす",
+    "Forme ます": "まわします",
+    "Forme ない": "まわさない",
+    "Forme て": "まわして",
+    "Traduction": "Tourner (qqch)"
+  },
+  {
+    "Kanji": "見せる",
+    "Kana": "みせる",
+    "Forme ます": "みせます",
+    "Forme ない": "みせない",
+    "Forme て": "みせて",
+    "Traduction": "Montrer"
+  },
+  {
+    "Kanji": "見る",
+    "Kana": "みる",
+    "Forme ます": "みます",
+    "Forme ない": "みない",
+    "Forme て": "みて",
+    "Traduction": "Regarder"
+  },
+  {
+    "Kanji": "迎える",
+    "Kana": "むかえる",
+    "Forme ます": "むかえます",
+    "Forme ない": "むかえない",
+    "Forme て": "むかえて",
+    "Traduction": "Accueillir"
+  },
+  {
+    "Kanji": "持つ",
+    "Kana": "もつ",
+    "Forme ます": "もちます",
+    "Forme ない": "もたない",
+    "Forme て": "もって",
+    "Traduction": "Porter"
+  },
+  {
+    "Kanji": "持って行く",
+    "Kana": "もっていく",
+    "Forme ます": "もっていくます",
+    "Forme ない": "もっていかない",
+    "Forme て": "もっていって",
+    "Traduction": "Emporter"
+  },
+  {
+    "Kanji": "持って来る",
+    "Kana": "もってくる",
+    "Forme ます": "もってきます",
+    "Forme ない": "もってこない",
+    "Forme て": "もってきて",
+    "Traduction": "Apporter"
+  },
+  {
+    "Kanji": "戻る",
+    "Kana": "もどる",
+    "Forme ます": "もどります",
+    "Forme ない": "もどらない",
+    "Forme て": "もどって",
+    "Traduction": "Revenir, retourner"
+  },
+  {
+    "Kanji": "",
+    "Kana": "もらう",
+    "Forme ます": "もらいます",
+    "Forme ない": "もらわない",
+    "Forme て": "もらって",
+    "Traduction": "Recevoir"
+  },
+  {
+    "Kanji": "役に立つ",
+    "Kana": "やくにたつ",
+    "Forme ます": "やくにたちます",
+    "Forme ない": "やくにたたない",
+    "Forme て": "やくにたって",
+    "Traduction": "Être utile, servir à"
+  },
+  {
+    "Kanji": "休む",
+    "Kana": "やすむ",
+    "Forme ます": "やすみます",
+    "Forme ない": "やすまない",
+    "Forme て": "やすんで",
+    "Traduction": "Se reposer"
+  },
+  {
+    "Kanji": "",
+    "Kana": "やめる",
+    "Forme ます": "やめます",
+    "Forme ない": "やめない",
+    "Forme て": "やめて",
+    "Traduction": "Arrêter"
+  },
+  {
+    "Kanji": "",
+    "Kana": "やる",
+    "Forme ます": "やります",
+    "Forme ない": "やらない",
+    "Forme て": "やって",
+    "Traduction": "Faire"
+  },
+  {
+    "Kanji": "呼ぶ",
+    "Kana": "よぶ",
+    "Forme ます": "よびます",
+    "Forme ない": "よばない",
+    "Forme て": "よんで",
+    "Traduction": "Appeler"
+  },
+  {
+    "Kanji": "読む",
+    "Kana": "よむ",
+    "Forme ます": "よみます",
+    "Forme ない": "よまない",
+    "Forme て": "よんで",
+    "Traduction": "Lire"
+  },
+  {
+    "Kanji": "留学する",
+    "Kana": "りゅうがくする",
+    "Forme ます": "りゅうがくします",
+    "Forme ない": "りゅうがくしない",
+    "Forme て": "りゅうがくして",
+    "Traduction": "Faire des études à l’étranger"
+  },
+  {
+    "Kanji": "旅行する",
+    "Kana": "りょこうする",
+    "Forme ます": "りょこうします",
+    "Forme ない": "りょこうしない",
+    "Forme て": "りょこうして",
+    "Traduction": "Voyager"
+  },
+  {
+    "Kanji": "練習する",
+    "Kana": "れんしゅうする",
+    "Forme ます": "れんしゅうします",
+    "Forme ない": "れんしゅうしない",
+    "Forme て": "れんしゅうして",
+    "Traduction": "Faire des exercices, s’entraîner"
+  },
+  {
+    "Kanji": "分かる",
+    "Kana": "わかる",
+    "Forme ます": "わかります",
+    "Forme ない": "わからない",
+    "Forme て": "わかって",
+    "Traduction": "Comprendre"
+  },
+  {
+    "Kanji": "忘れる",
+    "Kana": "わすれる",
+    "Forme ます": "わすれます",
+    "Forme ない": "わすれない",
+    "Forme て": "わすれて",
+    "Traduction": "Oublier"
+  },
+  {
+    "Kanji": "渡る",
+    "Kana": "わたる",
+    "Forme ます": "わたります",
+    "Forme ない": "わたらない",
+    "Forme て": "わたって",
+    "Traduction": "Traverser"
+  },
+  {
+    "Kanji": "笑う",
+    "Kana": "わらう",
+    "Forme ます": "わらいます",
+    "Forme ない": "わらわない",
+    "Forme て": "わらって",
+    "Traduction": "Rire"
+  }
+]
